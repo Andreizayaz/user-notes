@@ -6,6 +6,8 @@ import { store, persistor } from './store';
 
 import App from './App';
 
+import 'src/scss/main.scss';
+
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <Provider store={store}>
