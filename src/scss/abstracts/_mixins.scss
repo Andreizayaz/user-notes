@@ -14,14 +14,8 @@
   row-gap: $row-gap;
 }
 
-@mixin block(
-  $display: block,
-  $padding: 0,
-  $margin: 0,
-  $width: auto,
-  $height: auto
-) {
-  display: $display;
+@mixin block($padding: 0, $margin: 0, $width: auto, $height: auto) {
+  display: block;
   margin: $margin;
   padding: $padding;
   height: $height;
