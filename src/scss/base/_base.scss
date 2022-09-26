@@ -39,3 +39,14 @@ img {
   max-height: 100%;
   max-width: 100%;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main{
+  flex: 1 1 auto;
+}
+
