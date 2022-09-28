@@ -1,0 +1,1 @@
+export { BaseBoxStyled } from './BaseBoxStyled';

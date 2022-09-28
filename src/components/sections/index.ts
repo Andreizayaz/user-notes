@@ -1,1 +1,1 @@
-export {};
+export { ToolBar } from './toolBar';

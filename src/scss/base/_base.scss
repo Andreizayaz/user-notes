@@ -19,6 +19,16 @@ body {
 a {
   text-decoration: none;
   cursor: pointer;
+
+  &.active {
+    color: #ffd67f;
+    border-bottom: 3px solid #ffd67f;
+  }
+
+  &:focus-visible,
+  &:focus {
+    outline: none;
+  }
 }
 
 button,
@@ -46,7 +56,6 @@ img {
   min-height: 100%;
 }
 
-main{
+main {
   flex: 1 1 auto;
 }
-
