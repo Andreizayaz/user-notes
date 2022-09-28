@@ -1,0 +1,13 @@
+{
+  "links": {
+    "create_note": "Create Note",
+    "all_notes": "All Notes"
+  },
+  "toolBar": {
+    "sort_by": "Sort By",
+    "date": "Date",
+    "title": "Title",
+    "search_note": "Search Note",
+    "search": "Search"
+  }
+}

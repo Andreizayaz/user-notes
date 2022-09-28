@@ -1,0 +1,1 @@
+export { ImageLinkStyled } from './ImageLinkStyled';
