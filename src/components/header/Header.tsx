@@ -38,7 +38,7 @@ export const Header: FC<HeaderPropsTypes> = ({ links }): ReactElement => {
               backgroundImage: `url(${
                 window.location.origin + '/user-notes-icon.png'
               })`,
-              transform: 'scale(1.1)'
+              '&:hover': { transform: 'scale(1.1)' }
             }}
             height='50px'
             width='50px'

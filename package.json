@@ -33,7 +33,6 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
     "redux-persist": "^6.0.0",
-    "redux-saga": "^1.2.1",
     "styled-components": "^5.3.6",
     "stylelint": "^14.11.0",
     "stylelint-config-prettier-scss": "^0.0.1",

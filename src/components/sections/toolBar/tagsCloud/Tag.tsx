@@ -7,8 +7,8 @@ import { Button, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
   btn: {
     position: 'absolute',
-    top: '5px',
-    right: '5px',
+    top: '3px',
+    right: '3px',
     display: 'none',
     marginLeft: 'auto',
     padding: '0',
@@ -21,8 +21,8 @@ const useStyles = makeStyles(() => ({
   },
   closeIcon: {
     '&&': {
-      height: '15px',
-      width: '15px',
+      height: '10px',
+      width: '10px',
       color: 'red',
       transition: 'all 1s',
       '&:hover': {
@@ -41,9 +41,10 @@ export const Tag: FC<TagPropsTypes> = ({ tagText }): ReactElement => {
   return (
     <FlexBoxStyled
       flexDirection='column'
-      padding='10px 15px'
+      padding='10px'
       sx={{
         position: 'relative',
+        borderRadius: '5px',
         backgroundColor: 'rgba(25,118,210, .5)',
         '&:hover button': { display: 'block' },
         cursor: 'pointer'
@@ -52,7 +53,9 @@ export const Tag: FC<TagPropsTypes> = ({ tagText }): ReactElement => {
       <Button className={btn}>
         <CloseIcon className={closeIcon} />
       </Button>
-      <BaseTextStyled color='white'>{tagText}</BaseTextStyled>
+      <BaseTextStyled color='white' fontSize='14px'>
+        {tagText}
+      </BaseTextStyled>
     </FlexBoxStyled>
   );
 };

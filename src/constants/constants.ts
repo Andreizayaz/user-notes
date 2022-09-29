@@ -2,8 +2,8 @@
 
 // Internal Links
 export const HOME_LINK = '/';
-export const CREATE_NOTE_LINK = 'create';
-export const ALL_NOTES_LINK = 'notes';
+export const CREATE_NOTE_LINK = '/create';
+export const ALL_NOTES_LINK = '/notes';
 
 // External Links
 export const GITHUB_LINK = 'https://github.com/Andreizayaz';

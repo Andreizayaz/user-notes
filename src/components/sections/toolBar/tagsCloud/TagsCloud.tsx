@@ -8,7 +8,11 @@ type TagsCloudPropsTypes = {
 };
 
 export const TagsCloud: FC<TagsCloudPropsTypes> = ({ tags }): ReactElement => (
-  <FlexBoxStyled maxWidth='300px' width='30%'>
+  <FlexBoxStyled
+    minWidth='100px'
+    width='fit-content'
+    sx={{ maxWidth: '33%', columnGap: '3px' }}
+  >
     {tags.map((item) => (
       <Tag key={item} tagText={item} />
     ))}

@@ -1,3 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-export const rootReducer = combineReducers({});
+import { userNotesReducer } from 'src/store/notes';
+
+export const rootReducer = combineReducers({
+  userNotesState: userNotesReducer
+});

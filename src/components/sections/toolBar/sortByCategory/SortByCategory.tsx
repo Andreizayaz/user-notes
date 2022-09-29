@@ -16,7 +16,7 @@ export const SortByCategory: FC = (): ReactElement => {
   };
 
   return (
-    <Box sx={{ minWidth: 300 }}>
+    <Box sx={{ width: '33%', minWidth: 100 }}>
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>{t('sort_by')}</InputLabel>
         <Select
