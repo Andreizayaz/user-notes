@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent, ReactElement, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { TextField, List, ListItemButton } from '@mui/material';
+import { TextField, List, ListItemButton, Box } from '@mui/material';
 import {
   BaseButtonStyled,
   FlexBoxStyled
@@ -26,17 +26,20 @@ export const Search: FC = (): ReactElement => {
   const handleBlur = () => setIsList(false);
 
   return (
-    <FlexBoxStyled flexDirection='column'>
+    <FlexBoxStyled flexDirection='column' width='33%'>
       <FlexBoxStyled
         alignItems='center'
+        justifyContent='flex-start'
         component='form'
+        width='100%'
+        sx={{ columnGap: '3px' }}
         onSubmit={handleSubmit}
       >
         <TextField
           id='outlined-basic'
           label={t('search_note')}
           variant='outlined'
-          sx={{ minWidth: '300px' }}
+          sx={{ minWidth: '100px', width: '70%' }}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -44,33 +47,38 @@ export const Search: FC = (): ReactElement => {
         <BaseButtonStyled
           type='submit'
           variant='contained'
-          sx={{ marginLeft: '10px' }}
+          sx={{ width: '25%' }}
         >
           {t('search')}
         </BaseButtonStyled>
       </FlexBoxStyled>
       {isList && (
-        <List
-          sx={{
-            marginTop: '10px',
-            marginRight: 'auto',
-            minWidth: '300px',
-            maxHeight: '200px',
-            overflowY: 'scroll'
-          }}
-        >
-          {['hello', 'amising', 'world'].map((item) => (
-            <ListItemButton
-              key={item}
-              component={NavLink}
-              to='/nth'
-              sx={{ padding: '20px' }}
-              divider
-            >
-              {item}
-            </ListItemButton>
-          ))}
-        </List>
+        <Box sx={{ position: 'relative', width: '100%' }}>
+          <List
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              zIndex: 1,
+              marginTop: '10px',
+              minWidth: '300px',
+              maxHeight: '200px',
+              overflowY: 'auto'
+            }}
+          >
+            {['hello', 'amising', 'world'].map((item) => (
+              <ListItemButton
+                key={item}
+                component={NavLink}
+                to='/nth'
+                sx={{ padding: '20px' }}
+                divider
+              >
+                {item}
+              </ListItemButton>
+            ))}
+          </List>
+        </Box>
       )}
     </FlexBoxStyled>
   );

@@ -8,6 +8,7 @@ export const FlexBoxStyled = styled(BaseBoxStyled)<FlexStyleProps>(
   ({ alignItems, justifyContent }) => ({
     display: 'flex',
     alignItems: alignItems || 'center',
-    justifyContent: justifyContent || 'space-between'
+    justifyContent: justifyContent || 'space-between',
+    flexWrap: 'wrap'
   })
 );

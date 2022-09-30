@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 
-import { AppBar, makeStyles } from '@material-ui/core';
+import { AppBar } from '@material-ui/core';
 
 import { Container, NavBar } from 'src/components/common';
 import {
@@ -12,12 +12,7 @@ import { NavLinksType } from 'src/components/common/navBar/types';
 
 import { HOME_LINK } from 'src/constants';
 
-const useStyles = makeStyles(() => ({
-  appBar: {
-    position: 'static',
-    backgroundColor: '#1976d2'
-  }
-}));
+import { useStyles } from './styles';
 
 type HeaderPropsTypes = {
   links: NavLinksType[];
@@ -38,7 +33,7 @@ export const Header: FC<HeaderPropsTypes> = ({ links }): ReactElement => {
               backgroundImage: `url(${
                 window.location.origin + '/user-notes-icon.png'
               })`,
-              transform: 'scale(1.1)'
+              '&:hover': { transform: 'scale(1.1)' }
             }}
             height='50px'
             width='50px'

@@ -1,7 +1,22 @@
 import { FC, ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import { MainContainer } from 'src/components/common';
+import { selectUserNotes } from 'src/store/notes';
 
-export const AllNotesPage: FC = (): ReactElement => (
-  <MainContainer title='All Notes'>All Notes</MainContainer>
-);
+import { MainContainer, PageTitle } from 'src/components/common';
+
+export const AllNotesPage: FC = (): ReactElement => {
+  const { t } = useTranslation('translation', { keyPrefix: 'all_notes_page' });
+  const userNotes = useSelector(selectUserNotes);
+  return (
+    <MainContainer title='All Notes' isToolBar={false}>
+      <PageTitle
+        isUserNotes={!!userNotes.length}
+        title={t('title_all_notes_page')}
+        yesNotes={t('yes_notes')}
+        noNotes={t('no_notes')}
+      />
+    </MainContainer>
+  );
+};

@@ -1,13 +1,12 @@
 import { FC, ReactElement } from 'react';
 
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, Link } from '@material-ui/core';
 
 import { Container } from 'src/components/common';
 import {
   FlexBoxStyled,
   BaseBoxStyled,
-  BaseTextStyled,
-  LinkStyled
+  BaseTextStyled
 } from 'src/components/styledComponents';
 
 import {
@@ -17,16 +16,7 @@ import {
   GITHUB_LINK
 } from 'src/constants';
 
-const useStyles = makeStyles(() => ({
-  footer: {
-    backgroundColor: '#1976d2'
-  },
-  link: {
-    '&:hover': {
-      color: '#FFD67F'
-    }
-  }
-}));
+import { useStyles } from './styles';
 
 export const Footer: FC = (): ReactElement => {
   const { footer, link } = useStyles();
@@ -38,9 +28,9 @@ export const Footer: FC = (): ReactElement => {
             <BaseTextStyled color='white'>{APP_NAME}</BaseTextStyled>
           </BaseBoxStyled>
           <BaseBoxStyled width='fit-content'>
-            <LinkStyled className={link} to={GITHUB_LINK} target='_blank'>
+            <Link className={link} href={GITHUB_LINK} target='_blank'>
               {AUTHOR_NAME}
-            </LinkStyled>
+            </Link>
           </BaseBoxStyled>
           <BaseBoxStyled width='fit-content'>
             <BaseTextStyled color='white'>

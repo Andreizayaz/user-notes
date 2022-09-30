@@ -9,5 +9,17 @@
     "title": "Title",
     "search_note": "Search Note",
     "search": "Search"
+  },
+  "home_page": {
+    "title_home_page": "Welcome to User Notes App!",
+    "no_notes": "You don't have any notes yet",
+    "yes_notes": "Your Resent Notes:",
+    "create_first_note": "Create your first note now!",
+    "view_all": "view all notes"
+  },
+  "all_notes_page": {
+    "title_all_notes_page": "View All Notes Here!",
+    "yes_notes": "Your All Notes",
+    "no_notes": "You don't have any notes yet"
   }
 }
