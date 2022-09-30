@@ -1,15 +1,8 @@
 import { FC, ReactElement, ReactNode } from 'react';
 
-import { Container as CommonContainer, makeStyles } from '@material-ui/core';
+import { Container as CommonContainer } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    margin: '0 auto',
-    padding: '20px 10px',
-    width: '80%',
-    maxWidth: '1400px'
-  }
-}));
+import { useStyles } from './styles';
 
 type ContainerPropsTypes = {
   children: NonNullable<ReactNode>;

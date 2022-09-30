@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import {
   FlexBoxStyled,
@@ -10,13 +10,7 @@ import {
 
 import { NavLinksType } from './types';
 
-const useStyles = makeStyles(() => ({
-  nav: {
-    width: '35%',
-    minWidth: 'fit-content',
-    marginLeft: 'auto'
-  }
-}));
+import { useStyles } from './styles';
 
 type NavBarPropsTypes = {
   links: NavLinksType[];

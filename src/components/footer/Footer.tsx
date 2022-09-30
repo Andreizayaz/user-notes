@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 
-import { Box, Link, makeStyles } from '@material-ui/core';
+import { Box, Link } from '@material-ui/core';
 
 import { Container } from 'src/components/common';
 import {
@@ -16,20 +16,7 @@ import {
   GITHUB_LINK
 } from 'src/constants';
 
-const useStyles = makeStyles(() => ({
-  footer: {
-    backgroundColor: '#1976d2'
-  },
-  link: {
-    color: 'white',
-    fontSize: '18px',
-    transition: 'all 1s',
-    '&:hover': {
-      color: '#FFD67F',
-      textDecoration: 'none'
-    }
-  }
-}));
+import { useStyles } from './styles';
 
 export const Footer: FC = (): ReactElement => {
   const { footer, link } = useStyles();
