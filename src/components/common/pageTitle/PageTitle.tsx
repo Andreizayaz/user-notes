@@ -22,7 +22,7 @@ export const PageTitle: FC<PageTitlePropsTypes> = ({
   noNotes,
   title
 }): ReactElement => {
-  const { headingSection } = useStyles();
+  const { headingSection, heading } = useStyles();
   const { t } = useTranslation('translation', {
     keyPrefix: 'home_page'
   });
@@ -33,7 +33,7 @@ export const PageTitle: FC<PageTitlePropsTypes> = ({
       flexDirection='column'
       rowGap='20px'
     >
-      <Typography component='h1' variant='h4'>
+      <Typography className={heading} component='h1' variant='h4'>
         {title}
       </Typography>
       <Typography component='h3' variant='h5'>

@@ -11,10 +11,10 @@ export const HomePage: FC = (): ReactElement => {
   const userNotes = useSelector(selectUserNotes);
 
   return (
-    <MainContainer title='User Notes' isToolBar={!!userNotes.length}>
+    <MainContainer title={t('home_page_title')} isToolBar={!!userNotes.length}>
       <PageTitle
         isUserNotes={!!userNotes.length}
-        title={t('title_home_page')}
+        title={t('home_page_heading')}
         yesNotes={t('yes_notes')}
         noNotes={t('no_notes')}
       />
