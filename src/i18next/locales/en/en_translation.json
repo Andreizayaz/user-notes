@@ -11,15 +11,29 @@
     "search": "Search"
   },
   "home_page": {
-    "title_home_page": "Welcome to User Notes App!",
+    "home_page_title": "User Notes",
+    "home_page_heading": "Welcome to User Notes App!",
     "no_notes": "You don't have any notes yet",
     "yes_notes": "Your Resent Notes:",
     "create_first_note": "Create your first note now!",
     "view_all": "view all notes"
   },
+  "create_note_page": {
+    "create_note_page_title": "Create Note",
+    "create_first_note": "Create your first note!",
+    "create_note": "Create your note!"
+  },
   "all_notes_page": {
-    "title_all_notes_page": "View All Notes Here!",
+    "all_notes_page_title": "All Notes",
+    "all_notes_page_heading": "View All Notes Here!",
     "yes_notes": "Your All Notes",
     "no_notes": "You don't have any notes yet"
+  },
+  "note_form": {
+    "title": "Title",
+    "note_text": "Note Text",
+    "tags_cloud": "Tags:",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

@@ -10,10 +10,10 @@ export const AllNotesPage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'all_notes_page' });
   const userNotes = useSelector(selectUserNotes);
   return (
-    <MainContainer title='All Notes' isToolBar={false}>
+    <MainContainer title={t('all_notes_page_title')} isToolBar={false}>
       <PageTitle
         isUserNotes={!!userNotes.length}
-        title={t('title_all_notes_page')}
+        title={t('all_notes_page_heading')}
         yesNotes={t('yes_notes')}
         noNotes={t('no_notes')}
       />

@@ -8,9 +8,13 @@ import { useStyles } from './styles';
 
 type TagPropsTypes = {
   tagText: string;
+  deleteTag: (tag: string) => void;
 };
 
-export const Tag: FC<TagPropsTypes> = ({ tagText }): ReactElement => {
+export const Tag: FC<TagPropsTypes> = ({
+  tagText,
+  deleteTag
+}): ReactElement => {
   const { btn, closeIcon } = useStyles();
   return (
     <FlexBoxStyled
@@ -24,7 +28,7 @@ export const Tag: FC<TagPropsTypes> = ({ tagText }): ReactElement => {
         cursor: 'pointer'
       }}
     >
-      <Button className={btn}>
+      <Button className={btn} onClick={() => deleteTag(tagText)}>
         <CloseIcon className={closeIcon} />
       </Button>
       <BaseTextStyled color='white' fontSize='14px'>
