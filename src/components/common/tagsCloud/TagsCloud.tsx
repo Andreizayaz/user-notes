@@ -17,7 +17,7 @@ export const TagsCloud: FC<TagsCloudPropsTypes> = ({
   <FlexBoxStyled
     minWidth='100px'
     width='fit-content'
-    justifyContent='flex-start'
+    justifyContent='center'
     sx={{ maxWidth: maxWidth, columnGap: '3px', rowGap: '3px' }}
   >
     {tags.map((item) => (

@@ -20,9 +20,15 @@ export const CreateNotePage: FC = (): ReactElement => {
   const { heading } = useStyles();
 
   return (
-    <MainContainer title={t('create_note_page_title')} isToolBar={false}>
+    <MainContainer
+      isUserNotes={!!userNotes.length}
+      pageTitle={t('create_note_page_title')}
+      isToolBar={false}
+      isCreateLink={false}
+      sectionTitle={t('create_note_page_title')}
+    >
       <FlexBoxStyled flexDirection='column' rowGap='20px'>
-        <Typography className={heading} component='h1' variant='h4'>
+        <Typography className={heading} component='h1' variant='h5'>
           {!userNotes.length ? t('create_first_note') : t('create_note')}
         </Typography>
         <CardForm />
