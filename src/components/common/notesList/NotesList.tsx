@@ -5,6 +5,7 @@ import { NoteType } from 'src/store/notes';
 
 import { NoteCard } from 'src/components/common/noteCard';
 import { FlexBoxStyled } from 'src/components/styledComponents';
+import { NOTE_LINK } from 'src/constants';
 
 type NotesListPropsTypes = {
   userNotes: NoteType[];
@@ -22,7 +23,8 @@ export const NotesList: FC<NotesListPropsTypes> = ({
     {userNotes.map((note) => (
       <Link
         key={note.id}
-        to='/'
+        to={`${NOTE_LINK}/${note.id}`}
+        state={note}
         style={{
           alignSelf: 'stretch',
           width: '33%',

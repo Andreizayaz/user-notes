@@ -13,20 +13,22 @@ type MainContainerPropsTypes = {
   pageTitle: string;
   children: NonNullable<ReactNode>;
   isToolBar?: boolean;
-  isUserNotes: boolean;
+  isUserNotes?: boolean;
   isCreateLink?: boolean;
+  isSubheadingSection?: boolean;
   yesNotes?: string;
   noNotes?: string;
-  sectionTitle: string;
+  sectionTitle?: string;
 };
 
 export const MainContainer: FC<MainContainerPropsTypes> = ({
   children,
   isToolBar = true,
   isCreateLink = true,
+  isSubheadingSection = true,
   pageTitle,
   sectionTitle,
-  isUserNotes,
+  isUserNotes = false,
   yesNotes,
   noNotes
 }): ReactElement => {
@@ -38,23 +40,25 @@ export const MainContainer: FC<MainContainerPropsTypes> = ({
       </Helmet>
       <Box component='main'>
         <Container>
-          <FlexBoxStyled flexDirection='column' rowGap='20px'>
-            <Typography
-              className={`${heading} ${subHeadingSection}`}
-              component='h1'
-              variant='h4'
-            >
-              {sectionTitle}
-            </Typography>
-            {isToolBar && <ToolBar />}
-            <PageTitle
-              isCreateLink={isCreateLink}
-              isUserNotes={isUserNotes}
-              noNotes={noNotes}
-              yesNotes={yesNotes}
-              subheadingSectionStyle={subHeadingSection}
-            />
-          </FlexBoxStyled>
+          {isSubheadingSection && (
+            <FlexBoxStyled flexDirection='column' rowGap='20px'>
+              <Typography
+                className={`${heading} ${subHeadingSection}`}
+                component='h1'
+                variant='h4'
+              >
+                {sectionTitle}
+              </Typography>
+              {isToolBar && <ToolBar />}
+              <PageTitle
+                isCreateLink={isCreateLink}
+                isUserNotes={isUserNotes}
+                noNotes={noNotes}
+                yesNotes={yesNotes}
+                subheadingSectionStyle={subHeadingSection}
+              />
+            </FlexBoxStyled>
+          )}
           {children}
         </Container>
       </Box>
