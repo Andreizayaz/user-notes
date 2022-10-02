@@ -11,7 +11,7 @@ import { ALL_NOTES_LINK, MAX_LIST_COUNT_ON_HOME_PAGE } from 'src/constants';
 
 export const HomePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'home_page' });
-  const userNotes = useSelector(selectUserNotes);
+  const userNotes = [...useSelector(selectUserNotes)];
 
   return (
     <MainContainer
@@ -30,6 +30,7 @@ export const HomePage: FC = (): ReactElement => {
           justifyContent='center'
         >
           {userNotes
+            .reverse()
             .filter((_, index) => index < MAX_LIST_COUNT_ON_HOME_PAGE)
             .map((note) => (
               <Link
