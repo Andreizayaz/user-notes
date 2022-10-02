@@ -8,12 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { TextField, Typography } from '@material-ui/core';
-import { Button } from '@mui/material';
 
 import { addUserNote } from 'src/store/notes';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
-import { TagsCloud } from 'src/components/common';
+import { TagsCloud, SaveCancelBtns } from 'src/components/common';
 
 import { getTagsList } from './helpers';
 import { useNavigate } from 'react-router-dom';
@@ -123,14 +122,11 @@ export const Form: FC = (): ReactElement => {
           <TagsCloud tags={note.tagsList} deleteTag={deleteTag} />
         </FlexBoxStyled>
       )}
-      <FlexBoxStyled columnGap='20px'>
-        <Button color='primary' variant='contained' type='submit'>
-          {t('save')}
-        </Button>
-        <Button color='error' variant='contained' onClick={handleCancel}>
-          {t('cancel')}
-        </Button>
-      </FlexBoxStyled>
+      <SaveCancelBtns
+        cancelBtnText={t('cancel')}
+        saveBtnText={t('save')}
+        handleCancel={handleCancel}
+      />
     </FlexBoxStyled>
   );
 };

@@ -7,38 +7,34 @@ import { FlexBoxStyled, LinkStyled } from 'src/components/styledComponents';
 
 import { CREATE_NOTE_LINK } from 'src/constants';
 
-import { useStyles } from './styles';
-
 type PageTitlePropsTypes = {
   isUserNotes: boolean;
-  yesNotes: string;
-  noNotes: string;
-  title: string;
+  isCreateLink: boolean;
+  yesNotes?: string;
+  noNotes?: string;
+  subheadingSectionStyle: string;
 };
 
 export const PageTitle: FC<PageTitlePropsTypes> = ({
   isUserNotes,
+  isCreateLink,
   yesNotes,
   noNotes,
-  title
+  subheadingSectionStyle
 }): ReactElement => {
-  const { headingSection, heading } = useStyles();
   const { t } = useTranslation('translation', {
     keyPrefix: 'home_page'
   });
 
   return (
     <FlexBoxStyled
-      className={headingSection}
+      className={subheadingSectionStyle}
       flexDirection='column'
       rowGap='20px'
     >
-      <Typography className={heading} component='h1' variant='h4'>
-        {title}
-      </Typography>
       <Typography component='h3' variant='h5'>
         {isUserNotes ? yesNotes : noNotes}
-        {!isUserNotes && (
+        {!isUserNotes && isCreateLink && (
           <LinkStyled
             to={CREATE_NOTE_LINK}
             sx={{ width: '100%', color: 'inherit' }}
