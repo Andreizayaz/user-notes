@@ -6,3 +6,4 @@ export { TagsCloud } from './tagsCloud';
 export { CardForm } from './cardForm';
 export { SaveCancelBtns, EditDelBtns } from './actionButtons';
 export { NoteCard } from './noteCard';
+export { NotesList } from './notesList';

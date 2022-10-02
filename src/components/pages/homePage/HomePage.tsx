@@ -2,16 +2,18 @@ import { FC, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
+import { Box } from '@material-ui/core';
+
 import { selectUserNotes } from 'src/store/notes';
 
-import { MainContainer, NoteCard } from 'src/components/common';
-import { FlexBoxStyled, LinkStyled } from 'src/components/styledComponents';
-import { Link } from 'react-router-dom';
+import { MainContainer, NotesList } from 'src/components/common';
+import { LinkStyled } from 'src/components/styledComponents';
+
 import { ALL_NOTES_LINK, MAX_LIST_COUNT_ON_HOME_PAGE } from 'src/constants';
 
 export const HomePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'home_page' });
-  const userNotes = [...useSelector(selectUserNotes)];
+  const userNotes = [...useSelector(selectUserNotes)].reverse();
 
   return (
     <MainContainer
@@ -23,28 +25,12 @@ export const HomePage: FC = (): ReactElement => {
       noNotes={t('no_notes')}
     >
       {!!userNotes.length && (
-        <FlexBoxStyled
-          rowGap='5px'
-          columnGap='5px'
-          style={{ marginTop: '50px' }}
-          justifyContent='center'
-        >
-          {userNotes
-            .reverse()
-            .filter((_, index) => index < MAX_LIST_COUNT_ON_HOME_PAGE)
-            .map((note) => (
-              <Link
-                key={note.id}
-                to='/'
-                style={{
-                  alignSelf: 'stretch',
-                  width: '33%',
-                  transition: 'all 1s'
-                }}
-              >
-                <NoteCard note={note} width='100%' />
-              </Link>
-            ))}
+        <Box>
+          <NotesList
+            userNotes={userNotes.filter(
+              (_, index) => index < MAX_LIST_COUNT_ON_HOME_PAGE
+            )}
+          />
           <LinkStyled
             to={ALL_NOTES_LINK}
             sx={{
@@ -56,7 +42,7 @@ export const HomePage: FC = (): ReactElement => {
           >
             {t('view_all')}
           </LinkStyled>
-        </FlexBoxStyled>
+        </Box>
       )}
     </MainContainer>
   );
