@@ -10,6 +10,7 @@ export const GITHUB_LINK = 'https://github.com/Andreizayaz';
 
 // List Count
 export const MAX_LIST_COUNT_ON_HOME_PAGE = 9;
+export const COUNT_PER_PAGE = MAX_LIST_COUNT_ON_HOME_PAGE;
 
 /* Footer data */
 export const APP_NAME = 'User Notes';
