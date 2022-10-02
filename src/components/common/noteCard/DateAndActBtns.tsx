@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, MouseEvent } from 'react';
 
 import { Typography } from '@material-ui/core';
 
@@ -7,8 +7,8 @@ import { FlexBoxStyled } from 'src/components/styledComponents';
 
 type DateAndActBtnsPropsTypes = {
   dateCreation: string;
-  handleEdit: () => void;
-  handleDelete: () => void;
+  handleEdit: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const DateAndActBtns: FC<DateAndActBtnsPropsTypes> = ({

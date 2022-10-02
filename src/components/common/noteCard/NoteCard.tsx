@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, MouseEvent } from 'react';
 
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 
@@ -9,6 +9,8 @@ import { TagsCloud } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
 import { DateAndActBtns } from './DateAndActBtns';
+import { useNavigate } from 'react-router-dom';
+import { EDIT_PAGE_LINK, NOTE_LINK } from 'src/constants';
 
 //import { useStyles } from './styles';
 
@@ -23,9 +25,21 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
   width = 'auto',
   isText = false
 }): ReactElement => {
-  const handleDelete = () => console.log('del');
+  const navigate = useNavigate();
+
+  const handleDeleteNote = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('del');
+  };
+
   const handleDeleteTag = () => console.log('del tag');
-  const handleEdit = () => console.log('edit');
+
+  const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`${NOTE_LINK}/${note.id}${EDIT_PAGE_LINK}`, { state: note });
+  };
 
   return (
     <Card style={{ width: width, padding: '10px', height: '100%' }}>
@@ -33,7 +47,7 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
         <DateAndActBtns
           dateCreation={new Date(note.dateCreation).toLocaleDateString()}
           handleEdit={handleEdit}
-          handleDelete={handleDelete}
+          handleDelete={handleDeleteNote}
         />
         <CardHeader
           title={note.title}

@@ -1,36 +1,17 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, MouseEvent } from 'react';
 
+import { Button } from '@material-ui/core';
 import { Clear } from '@mui/icons-material';
 import EditIcon from '@mui/icons-material/Edit';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
-import { Button, makeStyles } from '@material-ui/core';
+
+import { useStyles } from './styles';
 
 type EditDelBtnsPropsTypes = {
-  handleEdit: () => void;
-  handleDelete: () => void;
+  handleEdit: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
 };
-
-const useStyles = makeStyles(() => ({
-  root: {
-    width: 'fit-content',
-    height: 'fit-content',
-    padding: '0',
-    minWidth: 'fit-content',
-    transition: 'all 1s',
-
-    '&:hover': {
-      transform: 'scale(1.2)',
-      backgroundColor: 'transparent'
-    }
-  },
-  edit: {
-    color: 'rgba(255,206,28,.7)'
-  },
-  del: {
-    color: 'rgba(235,94,63,.7)'
-  }
-}));
 
 export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
   handleEdit,
