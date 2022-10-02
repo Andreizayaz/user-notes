@@ -15,7 +15,7 @@ import { DateAndActBtns } from './DateAndActBtns';
 type NoteCardPropsTypes = {
   note: NoteType;
   width?: string;
-  isText?: string;
+  isText?: boolean;
 };
 
 export const NoteCard: FC<NoteCardPropsTypes> = ({
@@ -40,13 +40,29 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
           component='h3'
           style={{ fontWeight: '700' }}
         />
-        <CardContent>
+        <CardContent
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            rowGap: '20px',
+            width: '100%',
+            justifyContent: 'center'
+          }}
+        >
           {isText && (
-            <Typography component='p' variant='h4'>
+            <Typography
+              component='p'
+              variant='h5'
+              style={{ textAlign: 'center' }}
+            >
               {note.text}
             </Typography>
           )}
-          <TagsCloud tags={note.tagsList} deleteTag={handleDeleteTag} />
+          <TagsCloud
+            width='100%'
+            tags={note.tagsList}
+            deleteTag={handleDeleteTag}
+          />
         </CardContent>
       </FlexBoxStyled>
     </Card>
