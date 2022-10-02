@@ -5,6 +5,7 @@ export const HOME_LINK = '/';
 export const CREATE_NOTE_LINK = '/create';
 export const ALL_NOTES_LINK = '/notes';
 export const NOTE_LINK = '/note';
+export const EDIT_PAGE_LINK = '/edit';
 
 // External Links
 export const GITHUB_LINK = 'https://github.com/Andreizayaz';
