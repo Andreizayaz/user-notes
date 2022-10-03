@@ -1,4 +1,5 @@
 import { FC, ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Typography } from '@material-ui/core';
@@ -8,9 +9,9 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import { MainContainer } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useStyles } from './styles';
 import { HOME_LINK } from 'src/constants';
-import { Link } from 'react-router-dom';
+
+import { useStyles } from './styles';
 
 export const ErrorPage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'error_page' });
