@@ -1,23 +1,22 @@
-import { FC, ReactElement, MouseEvent } from 'react';
+import { FC, ReactElement } from 'react';
 
 import { Typography } from '@material-ui/core';
 
 import { EditDelBtns } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
+import { NoteType } from 'src/store/notes';
 
 type DateAndActBtnsPropsTypes = {
   dateCreation: string;
-  handleEdit: (e: MouseEvent<HTMLButtonElement>) => void;
-  handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
+  note: NoteType;
 };
 
 export const DateAndActBtns: FC<DateAndActBtnsPropsTypes> = ({
-  dateCreation,
-  handleEdit,
-  handleDelete
+  note,
+  dateCreation
 }): ReactElement => (
   <FlexBoxStyled width='100%'>
     <Typography>{dateCreation}</Typography>
-    <EditDelBtns handleEdit={handleEdit} handleDelete={handleDelete} />
+    <EditDelBtns note={note} />
   </FlexBoxStyled>
 );

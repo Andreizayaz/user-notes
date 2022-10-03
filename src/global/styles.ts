@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useBtnStyles = makeStyles(() => ({
   root: {
     width: 'fit-content',
     height: 'fit-content',

@@ -14,10 +14,17 @@ export const UserNotePage: FC = (): ReactElement => {
   const location = useLocation();
   const note = location.state as NoteType;
   return (
-    <MainContainer pageTitle={note.title} isSubheadingSection={false}>
-      <Box className={root}>
-        <NoteCard note={note} isText={true} />
-      </Box>
+    <MainContainer
+      pageTitle={note?.title || 'Error Page'}
+      isSubheadingSection={false}
+    >
+      {note ? (
+        <Box className={root}>
+          <NoteCard note={note} isText={true} isPartTagsDisplay={false} />
+        </Box>
+      ) : (
+        'Error Page'
+      )}
     </MainContainer>
   );
 };

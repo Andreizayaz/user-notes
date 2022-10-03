@@ -15,20 +15,23 @@ export const AllNotesPage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'all_notes_page' });
   const userNotes = [...useSelector(selectUserNotes)].reverse();
   const [page, setPage] = useState(1);
-  const [countPages] = useState(ceil(userNotes.length / COUNT_PER_PAGE));
-  const [currentNotes, setCurrentNotes] = useState([
-    ...userNotes.slice(0, COUNT_PER_PAGE)
-  ]);
+  const [countPages, setCountPages] = useState(
+    ceil(userNotes.length / COUNT_PER_PAGE)
+  );
+
+  useEffect(() => {
+    setCountPages(ceil(userNotes.length / COUNT_PER_PAGE));
+  }, [userNotes]);
 
   const handleChange = (e: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
-  useEffect(() => {
+  const getCurrentNotes = () => {
     const start = page * COUNT_PER_PAGE - COUNT_PER_PAGE;
     const end = page * COUNT_PER_PAGE;
-    setCurrentNotes([...userNotes.slice(start, end)]);
-  }, [page]);
+    return userNotes.slice(start, end);
+  };
 
   return (
     <MainContainer
@@ -40,13 +43,15 @@ export const AllNotesPage: FC = (): ReactElement => {
       isToolBar={!!userNotes.length}
     >
       <Box>
-        <NotesList userNotes={currentNotes} />
-        <Pagination
-          count={countPages}
-          page={page}
-          onChange={handleChange}
-          style={{ margin: '20px auto', width: 'fit-content' }}
-        />
+        <NotesList userNotes={getCurrentNotes()} />
+        {userNotes.length > COUNT_PER_PAGE && (
+          <Pagination
+            count={countPages}
+            page={page}
+            onChange={handleChange}
+            style={{ margin: '20px auto', width: 'fit-content' }}
+          />
+        )}
       </Box>
     </MainContainer>
   );

@@ -19,7 +19,7 @@ export const EditPage: FC = (): ReactElement => {
       isUserNotes={true}
     >
       <FlexBoxStyled justifyContent='center' width='100%'>
-        <CardForm />
+        <CardForm isEdit currentNote={note} />
       </FlexBoxStyled>
     </MainContainer>
   );
