@@ -29,6 +29,12 @@
     "yes_notes": "Your All Notes",
     "no_notes": "You don't have any notes yet"
   },
+  "error_page": {
+    "error_page_title": "Error Page",
+    "section_title": "Page Not Found",
+    "helper_text": "Please, try again later or enter correct address",
+    "back_home": "Back Home"
+  },
   "note_form": {
     "title": "Title",
     "note_text": "Note Text",
