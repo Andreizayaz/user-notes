@@ -1,8 +1,5 @@
-import { ChangeEvent, FC, ReactElement, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -10,35 +7,40 @@ import * as yup from 'yup';
 
 import { TextField, Typography } from '@material-ui/core';
 
-import { addUserNote } from 'src/store/notes';
-
 import { FlexBoxStyled } from 'src/components/styledComponents';
 import { TagsCloud, SaveCancelBtns } from 'src/components/common';
+import { NoteType } from 'src/store/notes';
 
-import { HOME_LINK } from 'src/constants';
-
-import { getTagsList } from './helpers';
-
-//type FormPropsTypes = {};
+type FormPropsTypes = {
+  note: NoteType;
+  saveText: string;
+  cancelText: string;
+  titleLabel: string;
+  textLabel: string;
+  tagsCloudLabel: string;
+  saveData: () => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCancel: () => void;
+  deleteTag: (tagName: string) => void;
+};
 
 const schema = yup.object().shape({
   title: yup.string().required('Title is a required field'),
   text: yup.string().required('Note Text is a required field')
 });
 
-export const Form: FC = (): ReactElement => {
-  const { t } = useTranslation('translation', { keyPrefix: 'note_form' });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [note, setNote] = useState({
-    id: 0,
-    dateCreation: new Date(),
-    title: '',
-    text: '',
-    tagsList: [] as string[]
-  });
-
+export const Form: FC<FormPropsTypes> = ({
+  note,
+  saveText,
+  cancelText,
+  titleLabel,
+  textLabel,
+  tagsCloudLabel,
+  saveData,
+  handleChange,
+  handleCancel,
+  deleteTag
+}): ReactElement => {
   const {
     register,
     handleSubmit,
@@ -48,34 +50,6 @@ export const Form: FC = (): ReactElement => {
     mode: 'onBlur',
     resolver: yupResolver(schema)
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (name === 'text') {
-      note.tagsList = getTagsList(value);
-    }
-
-    setNote({ ...note, [name]: value });
-  };
-
-  const deleteTag = (tagName: string) => {
-    const modifiedText = note.text.replace(`#${tagName}`, ` ${tagName} `);
-    const modifiedTagsList = getTagsList(modifiedText);
-
-    setNote({ ...note, text: modifiedText, tagsList: modifiedTagsList });
-  };
-
-  const saveData = () => {
-    note.id = new Date().valueOf();
-    note.dateCreation = new Date();
-    dispatch(addUserNote(note));
-    navigate(HOME_LINK);
-  };
-
-  const handleCancel = () => {
-    setNote({ ...note, title: '', text: '' });
-    navigate(HOME_LINK);
-  };
 
   return (
     <FlexBoxStyled
@@ -88,7 +62,7 @@ export const Form: FC = (): ReactElement => {
       <TextField
         {...register('title')}
         id='title'
-        label={t('title')}
+        label={titleLabel}
         variant='outlined'
         fullWidth
         name='title'
@@ -100,7 +74,7 @@ export const Form: FC = (): ReactElement => {
       <TextField
         {...register('text')}
         id='text'
-        label={t('note_text')}
+        label={textLabel}
         variant='outlined'
         fullWidth
         multiline
@@ -118,14 +92,14 @@ export const Form: FC = (): ReactElement => {
             variant='h5'
             style={{ color: 'rgba(0,0,0, .7)' }}
           >
-            {t('tags_cloud')}
+            {tagsCloudLabel}
           </Typography>
           <TagsCloud tags={note.tagsList} deleteTag={deleteTag} />
         </FlexBoxStyled>
       )}
       <SaveCancelBtns
-        cancelBtnText={t('cancel')}
-        saveBtnText={t('save')}
+        saveBtnText={saveText}
+        cancelBtnText={cancelText}
         handleCancel={handleCancel}
       />
     </FlexBoxStyled>

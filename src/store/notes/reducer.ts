@@ -18,7 +18,9 @@ const UserNotesSlice = createSlice({
       state.userNotes = [...state.userNotes, action.payload];
     },
     editUserNote(state, action: UserNoteAction) {
-      state.userNotes[action.payload.id] = action.payload;
+      state.userNotes = state.userNotes.map((userNote) =>
+        userNote.id === action.payload.id ? action.payload : userNote
+      );
     },
     deleteUserNote(state, action: UserDeleteNoteAction) {
       state.userNotes = state.userNotes.filter(
