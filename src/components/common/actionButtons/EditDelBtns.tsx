@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useStyles } from './styles';
+import { useBtnStyles } from 'src/global';
 
 type EditDelBtnsPropsTypes = {
   handleEdit: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -17,7 +17,7 @@ export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
   handleEdit,
   handleDelete
 }): ReactElement => {
-  const { root, edit, del } = useStyles();
+  const { root, edit, del } = useBtnStyles();
   return (
     <FlexBoxStyled width='fit-content' columnGap='20px'>
       <Button className={root} onClick={handleEdit}>

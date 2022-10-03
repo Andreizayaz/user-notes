@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, ReactElement, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -14,9 +15,9 @@ import { addUserNote } from 'src/store/notes';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 import { TagsCloud, SaveCancelBtns } from 'src/components/common';
 
-import { getTagsList } from './helpers';
-import { useNavigate } from 'react-router-dom';
 import { HOME_LINK } from 'src/constants';
+
+import { getTagsList } from './helpers';
 
 //type FormPropsTypes = {};
 
