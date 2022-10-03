@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 
 import { Box } from '@material-ui/core';
 
@@ -7,24 +7,26 @@ import { NoteType } from 'src/store/notes';
 
 import { MainContainer, NoteCard } from 'src/components/common';
 
+import { ERROR_PAGE_LINK } from 'src/constants';
+
 import { useStyles } from './styles';
 
 export const UserNotePage: FC = (): ReactElement => {
   const { root } = useStyles();
   const location = useLocation();
   const note = location.state as NoteType;
+
   return (
-    <MainContainer
-      pageTitle={note?.title || 'Error Page'}
-      isSubheadingSection={false}
-    >
+    <>
       {note ? (
-        <Box className={root}>
-          <NoteCard note={note} isText={true} isPartTagsDisplay={false} />
-        </Box>
+        <MainContainer pageTitle={note.title} isSubheadingSection={false}>
+          <Box className={root}>
+            <NoteCard note={note} isText={true} isPartTagsDisplay={false} />
+          </Box>
+        </MainContainer>
       ) : (
-        'Error Page'
+        <Navigate to={ERROR_PAGE_LINK} replace />
       )}
-    </MainContainer>
+    </>
   );
 };

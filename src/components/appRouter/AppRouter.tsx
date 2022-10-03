@@ -6,7 +6,8 @@ import {
   CreateNotePage,
   AllNotesPage,
   UserNotePage,
-  EditPage
+  EditPage,
+  ErrorPage
 } from 'src/components/pages';
 
 import {
@@ -14,7 +15,8 @@ import {
   CREATE_NOTE_LINK,
   ALL_NOTES_LINK,
   NOTE_LINK,
-  EDIT_PAGE_LINK
+  EDIT_PAGE_LINK,
+  ERROR_PAGE_LINK
 } from 'src/constants';
 
 export const AppRouter: FC = (): ReactElement => (
@@ -24,5 +26,6 @@ export const AppRouter: FC = (): ReactElement => (
     <Route path={ALL_NOTES_LINK} element={<AllNotesPage />} />
     <Route path={`${NOTE_LINK}/:id`} element={<UserNotePage />} />
     <Route path={`${NOTE_LINK}/:id${EDIT_PAGE_LINK}`} element={<EditPage />} />
+    <Route path={ERROR_PAGE_LINK} element={<ErrorPage />} />
   </Routes>
 );
