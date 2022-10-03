@@ -1,6 +1,6 @@
 export const getTagsList = (text: string): string[] =>
   text
-    .split(' ')
+    .split(/[\s' ','\n']+/)
     .filter((item) => item.startsWith('#') && item.trim().length > 1)
     .flatMap((item) => item.replace(/[\W_]+/g, '') && item.split(/[\s'','#']+/))
     .filter((item) => item.trim().length) || [];

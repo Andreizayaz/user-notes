@@ -16,7 +16,7 @@ export const UserNotePage: FC = (): ReactElement => {
   return (
     <MainContainer pageTitle={note.title} isSubheadingSection={false}>
       <Box className={root}>
-        <NoteCard note={note} isText={true} />
+        <NoteCard note={note} isText={true} isPartTagsDisplay={false} />
       </Box>
     </MainContainer>
   );

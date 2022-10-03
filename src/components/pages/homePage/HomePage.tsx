@@ -31,17 +31,19 @@ export const HomePage: FC = (): ReactElement => {
               (_, index) => index < MAX_LIST_COUNT_ON_HOME_PAGE
             )}
           />
-          <LinkStyled
-            to={ALL_NOTES_LINK}
-            sx={{
-              margin: '50px 0',
-              width: '100%',
-              color: 'rgba(210,134,147, .9)',
-              textAlign: 'center'
-            }}
-          >
-            {t('view_all')}
-          </LinkStyled>
+          {userNotes.length > MAX_LIST_COUNT_ON_HOME_PAGE && (
+            <LinkStyled
+              to={ALL_NOTES_LINK}
+              sx={{
+                margin: '50px 0',
+                width: '100%',
+                color: 'rgba(210,134,147, .9)',
+                textAlign: 'center'
+              }}
+            >
+              {t('view_all')}
+            </LinkStyled>
+          )}
         </Box>
       )}
     </MainContainer>
