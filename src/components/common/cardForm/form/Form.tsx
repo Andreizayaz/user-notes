@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import parse from 'html-react-parser';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -7,9 +8,10 @@ import * as yup from 'yup';
 
 import { TextField, Typography } from '@material-ui/core';
 
+import { NoteType } from 'src/store/notes';
+
 import { FlexBoxStyled } from 'src/components/styledComponents';
 import { TagsCloud, SaveCancelBtns } from 'src/components/common';
-import { NoteType } from 'src/store/notes';
 
 type FormPropsTypes = {
   note: NoteType;
@@ -80,7 +82,7 @@ export const Form: FC<FormPropsTypes> = ({
         multiline
         minRows={10}
         name='text'
-        value={note.text}
+        value={parse(note.text)}
         onChange={handleChange}
         error={!!errors.text}
         helperText={errors?.text?.message}

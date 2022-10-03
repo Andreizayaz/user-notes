@@ -1,17 +1,22 @@
 import { ChangeEvent, FC, ReactElement, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Typography, Card } from '@material-ui/core';
-import { FlexBoxStyled } from 'src/components/styledComponents';
 
 import { addUserNote, editUserNote, NoteType } from 'src/store/notes';
 
-import { Form } from './form';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getTagsList } from './helpers';
-import { HOME_LINK } from 'src/constants';
+import { FlexBoxStyled } from 'src/components/styledComponents';
 import { EditDelBtns } from 'src/components/common/actionButtons';
+
+import { Form } from './form';
+
+import { HOME_LINK } from 'src/constants';
+
+import { getTagsList } from './helpers';
+
+import './CardForm.scss';
 
 type CardFormPropsTypes = {
   isEdit?: boolean;
