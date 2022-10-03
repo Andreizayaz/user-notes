@@ -28,7 +28,7 @@ export const AllNotesPage: FC = (): ReactElement => {
     const start = page * COUNT_PER_PAGE - COUNT_PER_PAGE;
     const end = page * COUNT_PER_PAGE;
     setCurrentNotes([...userNotes.slice(start, end)]);
-  }, [page]);
+  }, [userNotes, page]);
 
   return (
     <MainContainer
@@ -41,12 +41,14 @@ export const AllNotesPage: FC = (): ReactElement => {
     >
       <Box>
         <NotesList userNotes={currentNotes} />
-        <Pagination
-          count={countPages}
-          page={page}
-          onChange={handleChange}
-          style={{ margin: '20px auto', width: 'fit-content' }}
-        />
+        {userNotes.length > COUNT_PER_PAGE && (
+          <Pagination
+            count={countPages}
+            page={page}
+            onChange={handleChange}
+            style={{ margin: '20px auto', width: 'fit-content' }}
+          />
+        )}
       </Box>
     </MainContainer>
   );

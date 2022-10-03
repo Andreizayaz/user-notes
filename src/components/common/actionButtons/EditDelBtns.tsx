@@ -10,7 +10,12 @@ import { FlexBoxStyled } from 'src/components/styledComponents';
 
 import { useBtnStyles } from 'src/global';
 import { deleteUserNote, NoteType } from 'src/store/notes';
-import { EDIT_PAGE_LINK, HOME_LINK, NOTE_LINK } from 'src/constants';
+import {
+  ALL_NOTES_LINK,
+  EDIT_PAGE_LINK,
+  HOME_LINK,
+  NOTE_LINK
+} from 'src/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type EditDelBtnsPropsTypes = {
@@ -28,8 +33,13 @@ export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(navigate);
-  console.log(location);
+  const navigateTo = () => {
+    const { pathname } = location;
+    if (pathname.includes(ALL_NOTES_LINK)) {
+      return;
+    }
+    navigate(HOME_LINK);
+  };
 
   const editNote = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -41,7 +51,7 @@ export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
     e.preventDefault();
     e.stopPropagation();
     dispatch(deleteUserNote(note.id));
-    navigate(HOME_LINK);
+    navigateTo();
   };
   return (
     <FlexBoxStyled width='fit-content' columnGap='20px'>
