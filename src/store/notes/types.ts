@@ -1,3 +1,8 @@
+export type UserNotesType = {
+  userNotes: NoteType[];
+  sortType: string;
+};
+
 export type NoteType = {
   id: number;
   dateCreation: Date;
@@ -12,4 +17,12 @@ export type UserNoteAction = {
 
 export type UserDeleteNoteAction = {
   payload: number;
+};
+
+export type UserNotesSortTypeAction = {
+  payload: string;
+};
+
+export type UserNotesSortAction = {
+  payload: NoteType[];
 };

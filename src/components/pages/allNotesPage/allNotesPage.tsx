@@ -13,7 +13,7 @@ import { COUNT_PER_PAGE } from 'src/constants';
 export const AllNotesPage: FC = (): ReactElement => {
   const { ceil } = Math;
   const { t } = useTranslation('translation', { keyPrefix: 'all_notes_page' });
-  const userNotes = [...useSelector(selectUserNotes)].reverse();
+  const { userNotes } = useSelector(selectUserNotes);
   const [page, setPage] = useState(1);
   const [countPages, setCountPages] = useState(
     ceil(userNotes.length / COUNT_PER_PAGE)

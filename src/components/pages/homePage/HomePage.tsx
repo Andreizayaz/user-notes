@@ -13,7 +13,8 @@ import { ALL_NOTES_LINK, MAX_LIST_COUNT_ON_HOME_PAGE } from 'src/constants';
 
 export const HomePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'home_page' });
-  const userNotes = [...useSelector(selectUserNotes)].reverse();
+  const { userNotes } = useSelector(selectUserNotes);
+  console.log(userNotes);
 
   return (
     <MainContainer

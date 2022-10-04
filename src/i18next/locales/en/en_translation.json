@@ -5,7 +5,8 @@
   },
   "toolBar": {
     "sort_by": "Sort By",
-    "date": "Date",
+    "asc_date": "Ascendant Date",
+    "desc_date": "Descendant Date",
     "title": "Title",
     "search_note": "Search Note",
     "search": "Search"

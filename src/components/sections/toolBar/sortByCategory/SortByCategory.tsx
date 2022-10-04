@@ -1,18 +1,40 @@
 import { FC, ReactElement, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-export const SortByCategory: FC = (): ReactElement => {
+import { NoteType, setUserNotesSortType, sortUserNotes } from 'src/store/notes';
+
+import {
+  SORT_BY_ASC_DATE,
+  SORT_BY_DESC_DATE,
+  SORT_BY_TITLE
+} from 'src/constants';
+
+import { getSortedUserNotesByCategory } from 'src/global/helpers';
+
+type SortByCategoryPropsTypes = {
+  userNotes: NoteType[];
+  sortType: string;
+};
+
+export const SortByCategory: FC<SortByCategoryPropsTypes> = ({
+  userNotes,
+  sortType
+}): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
-  const [category, setCategory] = useState('');
+
+  const [category, setCategory] = useState(sortType);
+
+  const dispatch = useDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value);
+    const { value } = event.target;
+    dispatch(setUserNotesSortType(value));
+    dispatch(sortUserNotes(getSortedUserNotesByCategory(userNotes, value)));
+    setCategory(value);
   };
 
   return (
@@ -23,11 +45,12 @@ export const SortByCategory: FC = (): ReactElement => {
           labelId='demo-simple-select-label'
           id='demo-simple-select'
           value={category}
-          label='Sort By'
+          label={t('sort_by')}
           onChange={handleChange}
         >
-          <MenuItem value='date'>{t('date')}</MenuItem>
-          <MenuItem value='title'>{t('title')}</MenuItem>
+          <MenuItem value={SORT_BY_DESC_DATE}>{t('desc_date')}</MenuItem>
+          <MenuItem value={SORT_BY_ASC_DATE}>{t('asc_date')}</MenuItem>
+          <MenuItem value={SORT_BY_TITLE}>{t('title')}</MenuItem>
         </Select>
       </FormControl>
     </Box>
