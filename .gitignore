@@ -29,5 +29,3 @@ yarn-error.log*
 
 # jest config json
 jest.config.json
-
-/.env
