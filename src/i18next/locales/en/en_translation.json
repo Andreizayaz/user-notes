@@ -42,5 +42,11 @@
     "tags_cloud": "Tags:",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "delete_all_notes": {
+    "delete_all_notes": "Delete All Notes",
+    "alert_message": "Are you sure\nyou want to delete all notes?",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   }
 }

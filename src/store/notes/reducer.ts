@@ -46,6 +46,12 @@ const UserNotesSlice = createSlice({
         ({ id }) => id !== action.payload
       );
     },
+    deleteAllUserNote(state) {
+      state.userNotesData = {
+        userNotes: [],
+        sortType: ''
+      };
+    },
     setUserNotesSortType(state, action: UserNotesSortTypeAction) {
       state.userNotesData.sortType = action.payload;
     },
@@ -60,6 +66,7 @@ export const {
   addUserNote,
   editUserNote,
   deleteUserNote,
+  deleteAllUserNote,
   sortUserNotes,
   setUserNotesSortType
 } = UserNotesSlice.actions;
