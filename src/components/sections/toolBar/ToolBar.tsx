@@ -9,7 +9,7 @@ import { Search } from './search';
 import { TagsCloud } from 'src/components/common/tagsCloud';
 
 export const ToolBar: FC = (): ReactElement => {
-  const userNotes = useSelector(selectUserNotes);
+  const { userNotes, sortType } = useSelector(selectUserNotes);
 
   const handleDeleteTag = () => console.log('del tag');
 
@@ -19,7 +19,7 @@ export const ToolBar: FC = (): ReactElement => {
 
   return (
     <FlexBoxStyled alignItems='flex-start' width='100%'>
-      <SortByCategory />
+      <SortByCategory userNotes={userNotes} sortType={sortType} />
       <TagsCloud deleteTag={handleDeleteTag} tags={tagsList} maxWidth='33%' />
       <Search />
     </FlexBoxStyled>

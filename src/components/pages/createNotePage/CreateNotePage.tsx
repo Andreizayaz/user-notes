@@ -15,7 +15,7 @@ export const CreateNotePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', {
     keyPrefix: 'create_note_page'
   });
-  const userNotes = useSelector(selectUserNotes);
+  const { userNotes } = useSelector(selectUserNotes);
 
   const { heading } = useStyles();
 

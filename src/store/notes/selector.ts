@@ -1,5 +1,5 @@
 import { RootStateType } from '../index';
-import { NoteType } from './types';
+import { UserNotesType } from './types';
 
-export const selectUserNotes = (state: RootStateType): NoteType[] =>
-  state.userNotesState.userNotes;
+export const selectUserNotes = (state: RootStateType): UserNotesType =>
+  state.userNotesState.userNotesData;

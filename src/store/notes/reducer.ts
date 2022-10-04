@@ -1,13 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { NoteType, UserDeleteNoteAction, UserNoteAction } from './types';
+import { getSortedUserNotesByCategory } from 'src/global/helpers';
+
+import {
+  UserNotesType,
+  UserDeleteNoteAction,
+  UserNoteAction,
+  UserNotesSortAction,
+  UserNotesSortTypeAction
+} from './types';
 
 type initialStateType = {
-  userNotes: NoteType[];
+  userNotesData: UserNotesType;
 };
 
 const initialState: initialStateType = {
-  userNotes: []
+  userNotesData: {
+    userNotes: [],
+    sortType: ''
+  }
 };
 
 const UserNotesSlice = createSlice({
@@ -15,23 +26,42 @@ const UserNotesSlice = createSlice({
   initialState,
   reducers: {
     addUserNote(state, action: UserNoteAction) {
-      state.userNotes = [...state.userNotes, action.payload];
+      state.userNotesData.userNotes = [
+        ...state.userNotesData.userNotes,
+        action.payload
+      ];
+      state.userNotesData.userNotes = getSortedUserNotesByCategory(
+        state.userNotesData.userNotes,
+        state.userNotesData.sortType
+      );
     },
     editUserNote(state, action: UserNoteAction) {
-      state.userNotes = state.userNotes.map((userNote) =>
-        userNote.id === action.payload.id ? action.payload : userNote
+      state.userNotesData.userNotes = state.userNotesData.userNotes.map(
+        (userNote) =>
+          userNote.id === action.payload.id ? action.payload : userNote
       );
     },
     deleteUserNote(state, action: UserDeleteNoteAction) {
-      state.userNotes = state.userNotes.filter(
+      state.userNotesData.userNotes = state.userNotesData.userNotes.filter(
         ({ id }) => id !== action.payload
       );
+    },
+    setUserNotesSortType(state, action: UserNotesSortTypeAction) {
+      state.userNotesData.sortType = action.payload;
+    },
+    sortUserNotes(state, action: UserNotesSortAction) {
+      state.userNotesData.userNotes = action.payload;
     }
   }
 });
 
 // Actions
-export const { addUserNote, editUserNote, deleteUserNote } =
-  UserNotesSlice.actions;
+export const {
+  addUserNote,
+  editUserNote,
+  deleteUserNote,
+  sortUserNotes,
+  setUserNotesSortType
+} = UserNotesSlice.actions;
 
 export const userNotesReducer = UserNotesSlice.reducer;
