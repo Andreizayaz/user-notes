@@ -3,6 +3,7 @@ export {
   addUserNote,
   editUserNote,
   deleteUserNote,
+  deleteAllUserNote,
   sortUserNotes,
   setUserNotesSortType
 } from './reducer';

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { selectUserNotes } from 'src/store/notes';
 
+import { TagsCloud } from 'src/components/common/tagsCloud';
 import { FlexBoxStyled } from 'src/components/styledComponents';
+
 import { SortByCategory } from './sortByCategory';
 import { Search } from './search';
-import { TagsCloud } from 'src/components/common/tagsCloud';
+import { DeleteAllNotes } from './deleteAllNotes';
 
 export const ToolBar: FC = (): ReactElement => {
   const { userNotes, sortType } = useSelector(selectUserNotes);
@@ -22,6 +24,7 @@ export const ToolBar: FC = (): ReactElement => {
       <SortByCategory userNotes={userNotes} sortType={sortType} />
       <TagsCloud deleteTag={handleDeleteTag} tags={tagsList} maxWidth='33%' />
       <Search />
+      <DeleteAllNotes />
     </FlexBoxStyled>
   );
 };

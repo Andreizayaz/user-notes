@@ -7,3 +7,4 @@ export { CardForm } from './cardForm';
 export { SaveCancelBtns, EditDelBtns } from './actionButtons';
 export { NoteCard } from './noteCard';
 export { NotesList } from './notesList';
+export { ConfirmAlert } from './confirmAlert';
