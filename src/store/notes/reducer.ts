@@ -7,7 +7,8 @@ import {
   UserDeleteNoteAction,
   UserNoteAction,
   UserNotesSortAction,
-  UserNotesSortTypeAction
+  UserNotesSortTypeAction,
+  UserNotesDeleteTagAction
 } from './types';
 
 type initialStateType = {
@@ -57,6 +58,9 @@ const UserNotesSlice = createSlice({
     },
     sortUserNotes(state, action: UserNotesSortAction) {
       state.userNotesData.userNotes = action.payload;
+    },
+    deleteTagInUserNotes(state, action: UserNotesDeleteTagAction) {
+      state.userNotesData.userNotes = action.payload;
     }
   }
 });
@@ -68,7 +72,8 @@ export const {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType
+  setUserNotesSortType,
+  deleteTagInUserNotes
 } = UserNotesSlice.actions;
 
 export const userNotesReducer = UserNotesSlice.reducer;

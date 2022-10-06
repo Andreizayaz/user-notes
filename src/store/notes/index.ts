@@ -5,7 +5,8 @@ export {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType
+  setUserNotesSortType,
+  deleteTagInUserNotes
 } from './reducer';
 
 export { selectUserNotes } from './selector';

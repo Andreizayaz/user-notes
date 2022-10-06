@@ -10,9 +10,9 @@ import { addUserNote, editUserNote, NoteType } from 'src/store/notes';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 import { EditDelBtns } from 'src/components/common/actionButtons';
 
-import { Form } from './form';
-
 import { HOME_LINK } from 'src/constants';
+
+import { Form } from './form';
 
 import { getTagsList } from './helpers';
 

@@ -1,17 +1,19 @@
 import { FC, ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 
-import { NoteType } from 'src/store/notes';
+import { editUserNote, NoteType } from 'src/store/notes';
 
 import { TagsCloud } from 'src/components/common';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
+import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
+
 import { DateAndActBtns } from './DateAndActBtns';
 
 import { useStyles } from './styles';
-import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
 
 type NoteCardPropsTypes = {
   note: NoteType;
@@ -26,8 +28,17 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
   isText = false,
   isPartTagsDisplay = true
 }): ReactElement => {
-  const handleDeleteTag = () => console.log('del tag');
   const { root } = useStyles();
+
+  const dispatch = useDispatch();
+
+  const handleDeleteTag = (tagText: string) => {
+    const { parse, stringify } = JSON;
+    const modifyNote = parse(stringify(note)) as NoteType;
+    modifyNote.tagsList = note.tagsList.filter((tag) => tag !== tagText);
+    modifyNote.text = note.text.replace(`#${tagText}`, ` ${tagText} `);
+    dispatch(editUserNote(modifyNote));
+  };
 
   return (
     <Card style={{ width: width, padding: '10px', height: '100%' }}>

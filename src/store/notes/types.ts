@@ -26,3 +26,7 @@ export type UserNotesSortTypeAction = {
 export type UserNotesSortAction = {
   payload: NoteType[];
 };
+
+export type UserNotesDeleteTagAction = {
+  payload: NoteType[];
+};
