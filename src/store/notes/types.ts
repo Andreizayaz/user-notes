@@ -1,5 +1,7 @@
 export type UserNotesType = {
   userNotes: NoteType[];
+  filteredNotes: NoteType[];
+  selectedTags: string[];
   sortType: string;
 };
 
@@ -23,10 +25,10 @@ export type UserNotesSortTypeAction = {
   payload: string;
 };
 
-export type UserNotesSortAction = {
+export type UserNotesModifyAction = {
   payload: NoteType[];
 };
 
-export type UserNotesDeleteTagAction = {
-  payload: NoteType[];
+export type FilterByTagAction = {
+  payload: string[];
 };

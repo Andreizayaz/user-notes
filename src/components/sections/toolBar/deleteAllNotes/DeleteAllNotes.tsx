@@ -9,7 +9,7 @@ import { deleteAllUserNote } from 'src/store/notes';
 import { ConfirmAlert } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useBtnStyles } from './styles';
+import { useBtnStyles } from '../styles';
 
 export const DeleteAllNotes: FC = (): ReactElement => {
   const { root } = useBtnStyles();

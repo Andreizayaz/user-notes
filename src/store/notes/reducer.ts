@@ -6,9 +6,9 @@ import {
   UserNotesType,
   UserDeleteNoteAction,
   UserNoteAction,
-  UserNotesSortAction,
+  UserNotesModifyAction,
   UserNotesSortTypeAction,
-  UserNotesDeleteTagAction
+  FilterByTagAction
 } from './types';
 
 type initialStateType = {
@@ -18,6 +18,8 @@ type initialStateType = {
 const initialState: initialStateType = {
   userNotesData: {
     userNotes: [],
+    filteredNotes: [],
+    selectedTags: [],
     sortType: ''
   }
 };
@@ -50,17 +52,29 @@ const UserNotesSlice = createSlice({
     deleteAllUserNote(state) {
       state.userNotesData = {
         userNotes: [],
+        filteredNotes: [],
+        selectedTags: [],
         sortType: ''
       };
     },
     setUserNotesSortType(state, action: UserNotesSortTypeAction) {
       state.userNotesData.sortType = action.payload;
     },
-    sortUserNotes(state, action: UserNotesSortAction) {
+    sortUserNotes(state, action: UserNotesModifyAction) {
       state.userNotesData.userNotes = action.payload;
     },
-    deleteTagInUserNotes(state, action: UserNotesDeleteTagAction) {
+    deleteTagInUserNotes(state, action: UserNotesModifyAction) {
       state.userNotesData.userNotes = action.payload;
+    },
+    filterByTag(state, action: FilterByTagAction) {
+      state.userNotesData.selectedTags = action.payload;
+      state.userNotesData.filteredNotes = state.userNotesData.userNotes.filter(
+        ({ tagsList }) => action.payload.some((item) => tagsList.includes(item))
+      );
+    },
+    resetFilterByTag(state) {
+      state.userNotesData.filteredNotes = [];
+      state.userNotesData.selectedTags = [];
     }
   }
 });
@@ -73,7 +87,9 @@ export const {
   deleteAllUserNote,
   sortUserNotes,
   setUserNotesSortType,
-  deleteTagInUserNotes
+  deleteTagInUserNotes,
+  filterByTag,
+  resetFilterByTag
 } = UserNotesSlice.actions;
 
 export const userNotesReducer = UserNotesSlice.reducer;
