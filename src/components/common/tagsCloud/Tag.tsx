@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, MouseEvent } from 'react';
 
 import { BaseTextStyled, FlexBoxStyled } from 'src/components/styledComponents';
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,6 +16,14 @@ export const Tag: FC<TagPropsTypes> = ({
   deleteTag
 }): ReactElement => {
   const { btn, closeIcon } = useStyles();
+
+  const handleDeleteTag = (e: MouseEvent<HTMLButtonElement>) => {
+    console.log(e);
+    e.preventDefault();
+    e.stopPropagation();
+    deleteTag(tagText);
+  };
+
   return (
     <FlexBoxStyled
       flexDirection='column'
@@ -28,7 +36,7 @@ export const Tag: FC<TagPropsTypes> = ({
         cursor: 'pointer'
       }}
     >
-      <Button className={btn} onClick={() => deleteTag(tagText)}>
+      <Button className={btn} onClick={(e) => handleDeleteTag(e)}>
         <CloseIcon className={closeIcon} />
       </Button>
       <BaseTextStyled color='white' fontSize='14px'>
