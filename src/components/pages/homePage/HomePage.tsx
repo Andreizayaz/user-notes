@@ -13,7 +13,9 @@ import { ALL_NOTES_LINK, MAX_LIST_COUNT_ON_HOME_PAGE } from 'src/constants';
 
 export const HomePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'home_page' });
-  const { userNotes } = useSelector(selectUserNotes);
+  const { userNotes, filteredNotes } = useSelector(selectUserNotes);
+
+  const currNotes = filteredNotes.length ? filteredNotes : userNotes;
 
   return (
     <MainContainer
@@ -27,11 +29,11 @@ export const HomePage: FC = (): ReactElement => {
       {!!userNotes.length && (
         <Box>
           <NotesList
-            userNotes={userNotes.filter(
+            userNotes={currNotes.filter(
               (_, index) => index < MAX_LIST_COUNT_ON_HOME_PAGE
             )}
           />
-          {userNotes.length > MAX_LIST_COUNT_ON_HOME_PAGE && (
+          {currNotes.length > MAX_LIST_COUNT_ON_HOME_PAGE && (
             <LinkStyled
               to={ALL_NOTES_LINK}
               sx={{

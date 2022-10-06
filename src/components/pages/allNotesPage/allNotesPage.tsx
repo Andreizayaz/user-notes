@@ -13,15 +13,17 @@ import { COUNT_PER_PAGE } from 'src/constants';
 export const AllNotesPage: FC = (): ReactElement => {
   const { ceil } = Math;
   const { t } = useTranslation('translation', { keyPrefix: 'all_notes_page' });
-  const { userNotes } = useSelector(selectUserNotes);
+  const { userNotes, filteredNotes } = useSelector(selectUserNotes);
   const [page, setPage] = useState(1);
   const [countPages, setCountPages] = useState(
     ceil(userNotes.length / COUNT_PER_PAGE)
   );
 
+  const currNotes = filteredNotes.length ? filteredNotes : userNotes;
+
   useEffect(() => {
-    setCountPages(ceil(userNotes.length / COUNT_PER_PAGE));
-  }, [userNotes]);
+    setCountPages(ceil(currNotes.length / COUNT_PER_PAGE));
+  }, [userNotes, filteredNotes]);
 
   const handleChange = (e: ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -30,7 +32,7 @@ export const AllNotesPage: FC = (): ReactElement => {
   const getCurrentNotes = () => {
     const start = page * COUNT_PER_PAGE - COUNT_PER_PAGE;
     const end = page * COUNT_PER_PAGE;
-    return userNotes.slice(start, end);
+    return currNotes.slice(start, end);
   };
 
   return (
@@ -44,7 +46,7 @@ export const AllNotesPage: FC = (): ReactElement => {
     >
       <Box>
         <NotesList userNotes={getCurrentNotes()} />
-        {userNotes.length > COUNT_PER_PAGE && (
+        {currNotes.length > COUNT_PER_PAGE && (
           <Pagination
             count={countPages}
             page={page}

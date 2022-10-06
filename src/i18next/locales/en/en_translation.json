@@ -8,6 +8,8 @@
     "asc_date": "Ascendant Date",
     "desc_date": "Descendant Date",
     "title": "Title",
+    "filter_heading": "Filter By Tag",
+    "reset_filter": "Clear Filter Result",
     "search_note": "Search Note",
     "search": "Search"
   },

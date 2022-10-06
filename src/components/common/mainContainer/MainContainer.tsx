@@ -41,7 +41,7 @@ export const MainContainer: FC<MainContainerPropsTypes> = ({
       <Box component='main'>
         <Container>
           {isSubheadingSection && (
-            <FlexBoxStyled flexDirection='column' rowGap='20px'>
+            <FlexBoxStyled flexDirection='column' rowGap='30px'>
               <Typography
                 className={`${heading} ${subHeadingSection}`}
                 component='h1'
