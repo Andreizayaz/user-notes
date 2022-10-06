@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
+
 import { Tag } from './Tag';
 
 type TagsCloudPropsTypes = {

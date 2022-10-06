@@ -1,4 +1,5 @@
 import { FC, ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 
@@ -8,11 +9,11 @@ import { TagsCloud } from 'src/components/common';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
+import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
+
 import { DateAndActBtns } from './DateAndActBtns';
 
 import { useStyles } from './styles';
-import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
-import { useDispatch } from 'react-redux';
 
 type NoteCardPropsTypes = {
   note: NoteType;
