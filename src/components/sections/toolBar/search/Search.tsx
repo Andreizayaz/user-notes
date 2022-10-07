@@ -1,4 +1,12 @@
-import { ChangeEvent, FC, FormEvent, ReactElement, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  ReactElement,
+  useState,
+  FocusEvent,
+  useRef
+} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +26,7 @@ import { NOTE_LINK, SEARCH_RESULT_LIST_LINK } from 'src/constants';
 import { useStyles } from './styles';
 
 export const Search: FC = (): ReactElement => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
   const { text, list, link } = useStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
   const [isList, setIsList] = useState(false);
@@ -29,7 +38,8 @@ export const Search: FC = (): ReactElement => {
   const handleSubmit = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsList(false);
-    navigate(SEARCH_RESULT_LIST_LINK, { state: searchResult });
+    searchResult.length &&
+      navigate(SEARCH_RESULT_LIST_LINK, { state: searchResult });
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +53,14 @@ export const Search: FC = (): ReactElement => {
       : [];
 
     setSearchResult(result);
-
-    console.log(result);
   };
 
   const handleFocus = () => setIsList(true);
 
-  const handleBlur = () => setIsList(false);
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.currentTarget.contains(e.relatedTarget) && setIsList(false);
+  };
 
   return (
     <FlexBoxStyled flexDirection='column' width='33%'>
@@ -89,6 +100,7 @@ export const Search: FC = (): ReactElement => {
               {searchResult.map((note) => (
                 <ListItem key={note.id} style={{ padding: '20px' }} divider>
                   <Link
+                    ref={linkRef}
                     to={`${NOTE_LINK}/${note.id}`}
                     state={note}
                     className={link}
