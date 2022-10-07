@@ -8,7 +8,8 @@ import {
   UserNoteAction,
   UserNotesModifyAction,
   UserNotesSortTypeAction,
-  FilterByTagAction
+  FilterByTagAction,
+  FullTagsListAction
 } from './types';
 
 type initialStateType = {
@@ -20,7 +21,8 @@ const initialState: initialStateType = {
     userNotes: [],
     filteredNotes: [],
     selectedTags: [],
-    sortType: ''
+    sortType: '',
+    isFullTagsList: true
   }
 };
 
@@ -54,7 +56,8 @@ const UserNotesSlice = createSlice({
         userNotes: [],
         filteredNotes: [],
         selectedTags: [],
-        sortType: ''
+        sortType: '',
+        isFullTagsList: true
       };
     },
     sortUserNotes(state, action: UserNotesSortTypeAction) {
@@ -80,6 +83,9 @@ const UserNotesSlice = createSlice({
     resetFilterByTag(state) {
       state.userNotesData.filteredNotes = [];
       state.userNotesData.selectedTags = [];
+    },
+    toggleFullTagsList(state, action: FullTagsListAction) {
+      state.userNotesData.isFullTagsList = action.payload;
     }
   }
 });
@@ -93,7 +99,8 @@ export const {
   sortUserNotes,
   deleteTagInUserNotes,
   filterByTag,
-  resetFilterByTag
+  resetFilterByTag,
+  toggleFullTagsList
 } = UserNotesSlice.actions;
 
 export const userNotesReducer = UserNotesSlice.reducer;

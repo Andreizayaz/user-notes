@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -8,7 +8,8 @@ import {
   deleteTagInUserNotes,
   filterByTag,
   resetFilterByTag,
-  selectUserNotes
+  selectUserNotes,
+  toggleFullTagsList
 } from 'src/store/notes';
 
 import { TagsCloud } from 'src/components/common/tagsCloud';
@@ -22,12 +23,12 @@ import { useBtnStyles } from './styles';
 import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
 
 export const ToolBar: FC = (): ReactElement => {
-  const [isFullTagsList, setIsFullTagsList] = useState(true);
   const { root } = useBtnStyles();
 
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
 
-  const { userNotes, selectedTags, sortType } = useSelector(selectUserNotes);
+  const { userNotes, selectedTags, sortType, isFullTagsList } =
+    useSelector(selectUserNotes);
 
   const dispatch = useDispatch();
 
@@ -54,15 +55,15 @@ export const ToolBar: FC = (): ReactElement => {
 
   const handleResetFilter = () => dispatch(resetFilterByTag());
 
-  const toggleAllTags = () => setIsFullTagsList(!isFullTagsList);
+  const handleToggle = () => dispatch(toggleFullTagsList(!isFullTagsList));
 
   const tagsList = Array.from(
     new Set(userNotes.flatMap(({ tagsList }) => tagsList))
   );
 
   useEffect(() => {
-    if (tagsList.length > MAX_COUNT_TAGS_IN_TOOLBAR) {
-      setIsFullTagsList(false);
+    if (tagsList.length > MAX_COUNT_TAGS_IN_TOOLBAR && !isFullTagsList) {
+      dispatch(toggleFullTagsList(false));
     }
   }, [userNotes]);
 
@@ -93,7 +94,7 @@ export const ToolBar: FC = (): ReactElement => {
           <Button
             variant='outlined'
             className={root}
-            onClick={toggleAllTags}
+            onClick={handleToggle}
             style={{ borderColor: 'rgba(210,134,147, .9)' }}
           >
             {!isFullTagsList ? t('show_all_tags') : t('hide_add_tags')}

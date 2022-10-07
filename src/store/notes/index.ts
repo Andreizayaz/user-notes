@@ -7,7 +7,8 @@ export {
   sortUserNotes,
   deleteTagInUserNotes,
   filterByTag,
-  resetFilterByTag
+  resetFilterByTag,
+  toggleFullTagsList
 } from './reducer';
 
 export { selectUserNotes } from './selector';
