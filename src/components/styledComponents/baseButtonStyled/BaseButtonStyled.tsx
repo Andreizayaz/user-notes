@@ -8,6 +8,11 @@ export const BaseButtonStyled = styled(Button)<ButtonStyleTypes>(
     color: color || 'white',
     fontSize: fontSize || '14px',
     backgroundColor: backgroundColor || '#1976d2',
-    transition: 'all 1s'
+    transition: 'all 1s',
+
+    '&:disabled': {
+      color: 'white',
+      backgroundColor: 'rgba(25, 118, 210, 0.5)'
+    }
   })
 );
