@@ -16,6 +16,7 @@ export const GITHUB_LINK = 'https://github.com/Andreizayaz';
 export const MAX_LIST_COUNT_ON_HOME_PAGE = 9;
 export const COUNT_PER_PAGE = MAX_LIST_COUNT_ON_HOME_PAGE;
 export const MAX_COUNT_TAGS_ON_CARD = 3;
+export const MAX_COUNT_TAGS_IN_TOOLBAR = 9;
 
 /* Sort Options */
 // Sort Types

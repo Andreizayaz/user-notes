@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -8,7 +8,8 @@ import {
   deleteTagInUserNotes,
   filterByTag,
   resetFilterByTag,
-  selectUserNotes
+  selectUserNotes,
+  toggleFullTagsList
 } from 'src/store/notes';
 
 import { TagsCloud } from 'src/components/common/tagsCloud';
@@ -19,11 +20,16 @@ import { Search } from './search';
 import { DeleteAllNotes } from './deleteAllNotes';
 
 import { useBtnStyles } from './styles';
+import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
 
 export const ToolBar: FC = (): ReactElement => {
   const { root } = useBtnStyles();
+
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
-  const { userNotes, selectedTags, sortType } = useSelector(selectUserNotes);
+
+  const { userNotes, selectedTags, sortType, isFullTagsList } =
+    useSelector(selectUserNotes);
+
   const dispatch = useDispatch();
 
   const handleDeleteTag = (tagText: string) => {
@@ -49,13 +55,21 @@ export const ToolBar: FC = (): ReactElement => {
 
   const handleResetFilter = () => dispatch(resetFilterByTag());
 
+  const handleToggle = () => dispatch(toggleFullTagsList(!isFullTagsList));
+
   const tagsList = Array.from(
     new Set(userNotes.flatMap(({ tagsList }) => tagsList))
   );
 
+  useEffect(() => {
+    if (tagsList.length > MAX_COUNT_TAGS_IN_TOOLBAR && !isFullTagsList) {
+      dispatch(toggleFullTagsList(false));
+    }
+  }, [userNotes]);
+
   return (
     <FlexBoxStyled alignItems='flex-start' width='100%' rowGap='20px'>
-      <SortByCategory userNotes={userNotes} sortType={sortType} />
+      <SortByCategory sortType={sortType} />
       <FlexBoxStyled
         width='33%'
         flexDirection='column'
@@ -68,10 +82,24 @@ export const ToolBar: FC = (): ReactElement => {
         )}
         <TagsCloud
           deleteTag={handleDeleteTag}
-          tags={tagsList}
+          tags={
+            isFullTagsList
+              ? tagsList.sort()
+              : tagsList.sort().slice(0, MAX_COUNT_TAGS_IN_TOOLBAR)
+          }
           selectedTags={selectedTags}
           filterByTag={handleFilterByTag}
         />
+        {tagsList.length > MAX_COUNT_TAGS_IN_TOOLBAR && (
+          <Button
+            variant='outlined'
+            className={root}
+            onClick={handleToggle}
+            style={{ borderColor: 'rgba(210,134,147, .9)' }}
+          >
+            {!isFullTagsList ? t('show_all_tags') : t('hide_add_tags')}
+          </Button>
+        )}
         {!!tagsList.length && (
           <Button className={root} onClick={handleResetFilter}>
             {t('reset_filter')}

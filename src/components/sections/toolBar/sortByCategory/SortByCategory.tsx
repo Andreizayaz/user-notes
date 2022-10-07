@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { NoteType, setUserNotesSortType, sortUserNotes } from 'src/store/notes';
+import { sortUserNotes } from 'src/store/notes';
 
 import {
   SORT_BY_ASC_DATE,
@@ -13,15 +13,11 @@ import {
   SORT_BY_TITLE
 } from 'src/constants';
 
-import { getSortedUserNotesByCategory } from 'src/global/helpers';
-
 type SortByCategoryPropsTypes = {
-  userNotes: NoteType[];
   sortType: string;
 };
 
 export const SortByCategory: FC<SortByCategoryPropsTypes> = ({
-  userNotes,
   sortType
 }): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
@@ -32,8 +28,7 @@ export const SortByCategory: FC<SortByCategoryPropsTypes> = ({
 
   const handleChange = (event: SelectChangeEvent) => {
     const { value } = event.target;
-    dispatch(setUserNotesSortType(value));
-    dispatch(sortUserNotes(getSortedUserNotesByCategory(userNotes, value)));
+    dispatch(sortUserNotes(value));
     setCategory(value);
   };
 

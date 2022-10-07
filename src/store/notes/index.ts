@@ -5,10 +5,10 @@ export {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType,
   deleteTagInUserNotes,
   filterByTag,
-  resetFilterByTag
+  resetFilterByTag,
+  toggleFullTagsList
 } from './reducer';
 
 export { selectUserNotes } from './selector';

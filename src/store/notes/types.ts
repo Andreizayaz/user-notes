@@ -3,6 +3,7 @@ export type UserNotesType = {
   filteredNotes: NoteType[];
   selectedTags: string[];
   sortType: string;
+  isFullTagsList: boolean;
 };
 
 export type NoteType = {
@@ -31,4 +32,8 @@ export type UserNotesModifyAction = {
 
 export type FilterByTagAction = {
   payload: string[];
+};
+
+export type FullTagsListAction = {
+  payload: boolean;
 };

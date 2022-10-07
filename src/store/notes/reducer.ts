@@ -8,7 +8,8 @@ import {
   UserNoteAction,
   UserNotesModifyAction,
   UserNotesSortTypeAction,
-  FilterByTagAction
+  FilterByTagAction,
+  FullTagsListAction
 } from './types';
 
 type initialStateType = {
@@ -20,7 +21,8 @@ const initialState: initialStateType = {
     userNotes: [],
     filteredNotes: [],
     selectedTags: [],
-    sortType: ''
+    sortType: '',
+    isFullTagsList: true
   }
 };
 
@@ -54,14 +56,20 @@ const UserNotesSlice = createSlice({
         userNotes: [],
         filteredNotes: [],
         selectedTags: [],
-        sortType: ''
+        sortType: '',
+        isFullTagsList: true
       };
     },
-    setUserNotesSortType(state, action: UserNotesSortTypeAction) {
+    sortUserNotes(state, action: UserNotesSortTypeAction) {
       state.userNotesData.sortType = action.payload;
-    },
-    sortUserNotes(state, action: UserNotesModifyAction) {
-      state.userNotesData.userNotes = action.payload;
+      state.userNotesData.userNotes = getSortedUserNotesByCategory(
+        state.userNotesData.userNotes,
+        action.payload
+      );
+      state.userNotesData.filteredNotes = getSortedUserNotesByCategory(
+        state.userNotesData.filteredNotes,
+        action.payload
+      );
     },
     deleteTagInUserNotes(state, action: UserNotesModifyAction) {
       state.userNotesData.userNotes = action.payload;
@@ -75,6 +83,9 @@ const UserNotesSlice = createSlice({
     resetFilterByTag(state) {
       state.userNotesData.filteredNotes = [];
       state.userNotesData.selectedTags = [];
+    },
+    toggleFullTagsList(state, action: FullTagsListAction) {
+      state.userNotesData.isFullTagsList = action.payload;
     }
   }
 });
@@ -86,10 +97,10 @@ export const {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType,
   deleteTagInUserNotes,
   filterByTag,
-  resetFilterByTag
+  resetFilterByTag,
+  toggleFullTagsList
 } = UserNotesSlice.actions;
 
 export const userNotesReducer = UserNotesSlice.reducer;
