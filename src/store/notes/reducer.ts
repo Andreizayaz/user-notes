@@ -57,11 +57,16 @@ const UserNotesSlice = createSlice({
         sortType: ''
       };
     },
-    setUserNotesSortType(state, action: UserNotesSortTypeAction) {
+    sortUserNotes(state, action: UserNotesSortTypeAction) {
       state.userNotesData.sortType = action.payload;
-    },
-    sortUserNotes(state, action: UserNotesModifyAction) {
-      state.userNotesData.userNotes = action.payload;
+      state.userNotesData.userNotes = getSortedUserNotesByCategory(
+        state.userNotesData.userNotes,
+        action.payload
+      );
+      state.userNotesData.filteredNotes = getSortedUserNotesByCategory(
+        state.userNotesData.filteredNotes,
+        action.payload
+      );
     },
     deleteTagInUserNotes(state, action: UserNotesModifyAction) {
       state.userNotesData.userNotes = action.payload;
@@ -86,7 +91,6 @@ export const {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType,
   deleteTagInUserNotes,
   filterByTag,
   resetFilterByTag

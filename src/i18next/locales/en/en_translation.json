@@ -11,7 +11,9 @@
     "filter_heading": "Filter By Tag",
     "reset_filter": "Clear Filter Result",
     "search_note": "Search Note",
-    "search": "Search"
+    "search": "Search",
+    "show_all_tags": "Show All Tags",
+    "hide_add_tags": "Hide Additional Tags"
   },
   "home_page": {
     "home_page_title": "User Notes",

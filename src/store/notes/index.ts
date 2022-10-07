@@ -5,7 +5,6 @@ export {
   deleteUserNote,
   deleteAllUserNote,
   sortUserNotes,
-  setUserNotesSortType,
   deleteTagInUserNotes,
   filterByTag,
   resetFilterByTag
