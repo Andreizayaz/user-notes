@@ -1,24 +1,50 @@
 import { ChangeEvent, FC, FormEvent, ReactElement, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { TextField, List, ListItemButton, Box } from '@mui/material';
+import { TextField, List, Box } from '@mui/material';
+import { ListItem, Typography } from '@material-ui/core';
+
+import { NoteType, selectUserNotes } from 'src/store/notes';
+
 import {
   BaseButtonStyled,
   FlexBoxStyled
 } from 'src/components/styledComponents';
 
+import { NOTE_LINK, SEARCH_RESULT_LIST_LINK } from 'src/constants';
+
+import { useStyles } from './styles';
+
 export const Search: FC = (): ReactElement => {
+  const { text, list, link } = useStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
   const [isList, setIsList] = useState(false);
+  const [searchResult, setSearchResult] = useState<NoteType[]>([]);
+  const { userNotes } = useSelector(selectUserNotes);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsList(false);
+    navigate(SEARCH_RESULT_LIST_LINK, { state: searchResult });
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    const { value } = e.target;
+    const result = value.trim().length
+      ? userNotes.filter(
+          ({ title, tagsList }) =>
+            title.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
+            tagsList.includes(value.toLocaleLowerCase())
+        )
+      : [];
+
+    setSearchResult(result);
+
+    console.log(result);
   };
 
   const handleFocus = () => setIsList(true);
@@ -48,36 +74,34 @@ export const Search: FC = (): ReactElement => {
           type='submit'
           variant='contained'
           sx={{ width: '25%' }}
+          disabled={!searchResult.length}
         >
           {t('search')}
         </BaseButtonStyled>
       </FlexBoxStyled>
       {isList && (
         <Box sx={{ position: 'relative', width: '100%' }}>
-          <List
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              zIndex: 1,
-              marginTop: '10px',
-              minWidth: '300px',
-              maxHeight: '200px',
-              overflowY: 'auto'
-            }}
-          >
-            {['hello', 'amising', 'world'].map((item) => (
-              <ListItemButton
-                key={item}
-                component={NavLink}
-                to='/nth'
-                sx={{ padding: '20px' }}
-                divider
-              >
-                {item}
-              </ListItemButton>
-            ))}
-          </List>
+          {!searchResult.length && (
+            <Typography className={text}>{t('no_found')}</Typography>
+          )}
+          {!!searchResult.length && (
+            <List className={list}>
+              {searchResult.map((note) => (
+                <ListItem key={note.id} style={{ padding: '20px' }} divider>
+                  <Link
+                    to={`${NOTE_LINK}/${note.id}`}
+                    state={note}
+                    className={link}
+                  >
+                    <Typography component='h5' variant='h5'>
+                      {note.title}
+                    </Typography>
+                    <Typography component='p'>{note.text}</Typography>
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          )}
         </Box>
       )}
     </FlexBoxStyled>

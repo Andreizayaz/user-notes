@@ -13,7 +13,8 @@
     "search_note": "Search Note",
     "search": "Search",
     "show_all_tags": "Show All Tags",
-    "hide_add_tags": "Hide Additional Tags"
+    "hide_add_tags": "Hide Additional Tags",
+    "no_found": "Notes are not found"
   },
   "home_page": {
     "home_page_title": "User Notes",
@@ -33,6 +34,10 @@
     "all_notes_page_heading": "View All Notes Here!",
     "yes_notes": "Your All Notes",
     "no_notes": "You don't have any notes yet"
+  },
+  "found_notes_page": {
+    "found_notes_page_title": "Found Notes",
+    "found_notes_page_heading": "View All Found Notes Here!"
   },
   "error_page": {
     "error_page_title": "Error Page",
