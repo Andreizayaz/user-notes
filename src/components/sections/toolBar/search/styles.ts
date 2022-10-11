@@ -20,7 +20,7 @@ export const useStyles = makeStyles(() => ({
     left: 0,
     zIndex: 1,
     marginTop: '10px',
-    minWidth: '300px',
+    minWidth: '100%',
     maxHeight: '200px',
     overflowY: 'auto',
     backgroundColor: 'rgba(25, 118, 210, .7)'
