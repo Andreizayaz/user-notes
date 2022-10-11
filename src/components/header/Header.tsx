@@ -1,6 +1,9 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useState } from 'react';
 
-import { AppBar } from '@material-ui/core';
+import { AppBar, Button } from '@material-ui/core';
+
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { Container, NavBar } from 'src/components/common';
 import {
@@ -13,33 +16,36 @@ import { NavLinksType } from 'src/components/common/navBar/types';
 import { HOME_LINK } from 'src/constants';
 
 import { useStyles } from './styles';
+import { BurgerMenu } from './burgerMenu';
+import { useBtnStyles } from '../sections/toolBar/styles';
 
 type HeaderPropsTypes = {
   links: NavLinksType[];
 };
 
 export const Header: FC<HeaderPropsTypes> = ({ links }): ReactElement => {
-  const { appBar } = useStyles();
+  const { appBar, imgLink, burgerBtn, navLinks } = useStyles();
+  const { root } = useBtnStyles();
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const closeHandler = () => setIsOpen(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <AppBar component='header' className={appBar}>
       <Container>
-        <FlexBoxStyled>
-          <ImageLinkStyled
-            to={HOME_LINK}
-            sx={{
-              marginRight: 'auto',
-              border: 'none !important',
-              backgroundImage: `url(${
-                window.location.origin + '/user-notes-icon.png'
-              })`,
-              '&:hover': { transform: 'scale(1.1)' }
-            }}
-            height='50px'
-            width='50px'
-          />
-          <NavBar links={links} />
+        <FlexBoxStyled position='relative'>
+          <Button className={`${root} ${burgerBtn}`} onClick={toggleMenu}>
+            {isOpen ? <CloseIcon /> : <MenuIcon />}
+          </Button>
+          <ImageLinkStyled to={HOME_LINK} className={imgLink} />
+          <NavBar links={links} addClasses={`${navLinks}`} />
         </FlexBoxStyled>
+        <BurgerMenu isOpen={isOpen} closeHandler={closeHandler}>
+          <NavBar links={links} />
+        </BurgerMenu>
       </Container>
     </AppBar>
   );
