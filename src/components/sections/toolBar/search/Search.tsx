@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TextField, List, Box } from '@mui/material';
 import { ListItem, Typography } from '@material-ui/core';
+import { ClickAwayListener } from '@mui/base';
 
 import { NoteType, selectUserNotes } from 'src/store/notes';
 
@@ -27,7 +28,7 @@ import { useStyles } from './styles';
 
 export const Search: FC = (): ReactElement => {
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const { text, list, link } = useStyles();
+  const { text, list, link, searchBtn, inputField, flexStyle } = useStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
   const [isList, setIsList] = useState(false);
   const [searchResult, setSearchResult] = useState<NoteType[]>([]);
@@ -62,34 +63,40 @@ export const Search: FC = (): ReactElement => {
     e.currentTarget.contains(e.relatedTarget) && setIsList(false);
   };
 
+  const hideSearchList = () => setIsList(false);
+
   return (
-    <FlexBoxStyled flexDirection='column' width='33%'>
-      <FlexBoxStyled
-        alignItems='center'
-        justifyContent='flex-start'
-        component='form'
-        width='100%'
-        sx={{ columnGap: '3px' }}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id='outlined-basic'
-          label={t('search_note')}
-          variant='outlined'
-          sx={{ minWidth: '100px', width: '70%' }}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        <BaseButtonStyled
-          type='submit'
-          variant='contained'
-          sx={{ width: '25%' }}
-          disabled={!searchResult.length}
+    <FlexBoxStyled flexDirection='column' width='33%' className={flexStyle}>
+      <ClickAwayListener onClickAway={hideSearchList}>
+        <FlexBoxStyled
+          alignItems='center'
+          justifyContent='flex-start'
+          component='form'
+          width='100%'
+          sx={{ columnGap: '3px' }}
+          onSubmit={handleSubmit}
         >
-          {t('search')}
-        </BaseButtonStyled>
-      </FlexBoxStyled>
+          <TextField
+            id='outlined-basic'
+            label={t('search_note')}
+            variant='outlined'
+            sx={{ minWidth: '100px', width: '70%' }}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            className={inputField}
+          />
+          <BaseButtonStyled
+            type='submit'
+            variant='contained'
+            sx={{ width: '25%' }}
+            disabled={!searchResult.length}
+            className={searchBtn}
+          >
+            {t('search')}
+          </BaseButtonStyled>
+        </FlexBoxStyled>
+      </ClickAwayListener>
       {isList && (
         <Box sx={{ position: 'relative', width: '100%' }}>
           {!searchResult.length && (

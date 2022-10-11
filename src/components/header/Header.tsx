@@ -27,7 +27,7 @@ export const Header: FC<HeaderPropsTypes> = ({ links }): ReactElement => {
   const { appBar, imgLink, burgerBtn, navLinks } = useStyles();
   const { root } = useBtnStyles();
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const closeHandler = () => setIsOpen(false);
 

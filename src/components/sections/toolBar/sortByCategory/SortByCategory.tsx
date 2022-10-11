@@ -12,6 +12,7 @@ import {
   SORT_BY_DESC_DATE,
   SORT_BY_TITLE
 } from 'src/constants';
+import { useFlexStyles } from './styles';
 
 type SortByCategoryPropsTypes = {
   sortType: string;
@@ -21,6 +22,8 @@ export const SortByCategory: FC<SortByCategoryPropsTypes> = ({
   sortType
 }): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
+
+  const { flexStyle } = useFlexStyles();
 
   const [category, setCategory] = useState(sortType);
 
@@ -33,7 +36,7 @@ export const SortByCategory: FC<SortByCategoryPropsTypes> = ({
   };
 
   return (
-    <Box sx={{ width: '33%', minWidth: 100 }}>
+    <Box sx={{ width: '33%', minWidth: 100 }} className={flexStyle}>
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>{t('sort_by')}</InputLabel>
         <Select

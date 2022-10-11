@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { theme } from 'src/global';
 
 export const useBtnStyles = makeStyles(() => ({
   root: {
@@ -13,6 +14,17 @@ export const useBtnStyles = makeStyles(() => ({
 
     '&:hover': {
       transform: 'scale(1.2)'
+    }
+  }
+}));
+
+export const useFlexStyles = makeStyles(() => ({
+  flexStyles: {
+    [theme.breakpoints.down('upperDesktop')]: {
+      columnGap: '1px !important'
+    },
+    [theme.breakpoints.down('tablet')]: {
+      rowGap: '10px !important'
     }
   }
 }));

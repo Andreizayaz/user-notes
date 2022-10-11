@@ -32,7 +32,7 @@ export const MainContainer: FC<MainContainerPropsTypes> = ({
   yesNotes,
   noNotes
 }): ReactElement => {
-  const { heading, subHeadingSection } = useStyles();
+  const { flexStyle, heading, subHeadingSection } = useStyles();
   return (
     <>
       <Helmet>
@@ -41,7 +41,11 @@ export const MainContainer: FC<MainContainerPropsTypes> = ({
       <Box component='main'>
         <Container>
           {isSubheadingSection && (
-            <FlexBoxStyled flexDirection='column' rowGap='30px'>
+            <FlexBoxStyled
+              flexDirection='column'
+              rowGap='30px'
+              className={flexStyle}
+            >
               <Typography
                 className={`${heading} ${subHeadingSection}`}
                 component='h1'

@@ -1,6 +1,17 @@
 import { makeStyles } from '@material-ui/core';
+import { theme } from 'src/global';
 
 export const useStyles = makeStyles(() => ({
+  tag: {
+    position: 'relative',
+    borderRadius: '5px',
+    '&:hover button': { display: 'block' },
+    cursor: 'pointer',
+
+    [theme.breakpoints.down('tablet')]: {
+      padding: '5px !important'
+    }
+  },
   btn: {
     position: 'absolute',
     top: '3px',
