@@ -20,7 +20,7 @@ export const Tag: FC<TagPropsTypes> = ({
   filterByTag,
   deleteTag
 }): ReactElement => {
-  const { btn, closeIcon } = useStyles();
+  const { btn, closeIcon, tag } = useStyles();
 
   const handleDeleteTag = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -39,12 +39,7 @@ export const Tag: FC<TagPropsTypes> = ({
       flexDirection='column'
       padding='10px'
       style={{ backgroundColor: bgColor }}
-      sx={{
-        position: 'relative',
-        borderRadius: '5px',
-        '&:hover button': { display: 'block' },
-        cursor: 'pointer'
-      }}
+      className={tag}
     >
       <Button className={btn} onClick={(e) => handleDeleteTag(e)}>
         <CloseIcon className={closeIcon} />

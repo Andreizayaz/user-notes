@@ -17,6 +17,7 @@ import { Form } from './form';
 import { getTagsList } from './helpers';
 
 import './CardForm.scss';
+import { useCardFormStyles } from './style';
 
 type CardFormPropsTypes = {
   isEdit?: boolean;
@@ -27,6 +28,7 @@ export const CardForm: FC<CardFormPropsTypes> = ({
   isEdit = false,
   currentNote
 }): ReactElement => {
+  const { card } = useCardFormStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'note_form' });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ export const CardForm: FC<CardFormPropsTypes> = ({
   };
 
   return (
-    <Card style={{ padding: '20px', width: '50%' }}>
+    <Card className={card}>
       <FlexBoxStyled flexDirection='column' rowGap='20px'>
         {isEdit && (
           <FlexBoxStyled width='100%'>

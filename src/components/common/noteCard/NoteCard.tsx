@@ -13,7 +13,7 @@ import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
 
 import { DateAndActBtns } from './DateAndActBtns';
 
-import { useStyles } from './styles';
+import { useNoteCardStyles } from './styles';
 
 type NoteCardPropsTypes = {
   note: NoteType;
@@ -28,7 +28,7 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
   isText = false,
   isPartTagsDisplay = true
 }): ReactElement => {
-  const { root } = useStyles();
+  const { root, noteCard } = useNoteCardStyles();
 
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
   };
 
   return (
-    <Card style={{ width: width, padding: '10px', height: '100%' }}>
+    <Card style={{ width: width }} className={noteCard}>
       <FlexBoxStyled flexDirection='column' height='100%' width='100%'>
         <DateAndActBtns
           note={note}

@@ -19,11 +19,11 @@ import {
 import { useStyles } from './styles';
 
 export const Footer: FC = (): ReactElement => {
-  const { footer, link } = useStyles();
+  const { footer, flex, link } = useStyles();
   return (
     <Box component='footer' className={footer}>
       <Container>
-        <FlexBoxStyled>
+        <FlexBoxStyled className={flex}>
           <BaseBoxStyled width='fit-content'>
             <BaseTextStyled color='white'>{APP_NAME}</BaseTextStyled>
           </BaseBoxStyled>

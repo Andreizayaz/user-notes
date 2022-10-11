@@ -2,8 +2,6 @@ import { FC, ReactElement, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Typography } from '@material-ui/core';
-
 import {
   deleteTagInUserNotes,
   filterByTag,
@@ -12,18 +10,18 @@ import {
   toggleFullTagsList
 } from 'src/store/notes';
 
-import { TagsCloud } from 'src/components/common/tagsCloud';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
 import { SortByCategory } from './sortByCategory';
 import { Search } from './search';
 import { DeleteAllNotes } from './deleteAllNotes';
 
-import { useBtnStyles } from './styles';
+import { useFlexStyles } from './styles';
 import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
+import { TagsFilter } from './tagsFilter';
 
 export const ToolBar: FC = (): ReactElement => {
-  const { root } = useBtnStyles();
+  const { flexStyles } = useFlexStyles();
 
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
 
@@ -68,44 +66,26 @@ export const ToolBar: FC = (): ReactElement => {
   }, [userNotes]);
 
   return (
-    <FlexBoxStyled alignItems='flex-start' width='100%' rowGap='20px'>
+    <FlexBoxStyled
+      alignItems='flex-start'
+      width='100%'
+      rowGap='20px'
+      className={flexStyles}
+    >
       <SortByCategory sortType={sortType} />
-      <FlexBoxStyled
-        width='33%'
-        flexDirection='column'
-        color='rgba(210,134,147, .9)'
-      >
-        {!!tagsList.length && (
-          <Typography style={{ fontSize: '18px' }}>
-            {t('filter_heading')}
-          </Typography>
-        )}
-        <TagsCloud
-          deleteTag={handleDeleteTag}
-          tags={
-            isFullTagsList
-              ? tagsList.sort()
-              : tagsList.sort().slice(0, MAX_COUNT_TAGS_IN_TOOLBAR)
-          }
-          selectedTags={selectedTags}
-          filterByTag={handleFilterByTag}
-        />
-        {tagsList.length > MAX_COUNT_TAGS_IN_TOOLBAR && (
-          <Button
-            variant='outlined'
-            className={root}
-            onClick={handleToggle}
-            style={{ borderColor: 'rgba(210,134,147, .9)' }}
-          >
-            {!isFullTagsList ? t('show_all_tags') : t('hide_add_tags')}
-          </Button>
-        )}
-        {!!tagsList.length && (
-          <Button className={root} onClick={handleResetFilter}>
-            {t('reset_filter')}
-          </Button>
-        )}
-      </FlexBoxStyled>
+      <TagsFilter
+        filterHeading={t('filter_heading')}
+        showAllTags={t('show_all_tags')}
+        hideAddTags={t('hide_add_tags')}
+        resetFilter={t('reset_filter')}
+        isFullTagsList={isFullTagsList}
+        tagsList={tagsList}
+        selectedTags={selectedTags}
+        handleDeleteTag={handleDeleteTag}
+        handleFilterByTag={handleFilterByTag}
+        handleResetFilter={handleResetFilter}
+        handleToggle={handleToggle}
+      />
       <Search />
       <DeleteAllNotes />
     </FlexBoxStyled>

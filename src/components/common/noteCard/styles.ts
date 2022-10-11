@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useNoteCardStyles = makeStyles(() => ({
   root: {
     '& .MuiTypography-h5': {
       color: 'rgba(210,134,147, .9)',
@@ -8,5 +8,10 @@ export const useStyles = makeStyles(() => ({
       fontSize: '28px',
       fontWeight: 700
     }
+  },
+
+  noteCard: {
+    padding: '10px',
+    height: '100%'
   }
 }));
