@@ -1,7 +1,6 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement } from 'react';
 
 import { AppBar, Button } from '@material-ui/core';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -10,28 +9,29 @@ import {
   FlexBoxStyled,
   ImageLinkStyled
 } from 'src/components/styledComponents';
+import { BurgerMenu } from './burgerMenu';
 
 import { NavLinksType } from 'src/components/common/navBar/types';
 
 import { HOME_LINK } from 'src/constants';
 
-import { useStyles } from './styles';
-import { BurgerMenu } from './burgerMenu';
-import { useBtnStyles } from '../sections/toolBar/styles';
+import { useHeaderStyles, useBtnToolBarStyles } from 'src/global/styles';
 
 type HeaderPropsTypes = {
   links: NavLinksType[];
+  isOpen: boolean;
+  closeHandler: () => void;
+  toggleMenu: () => void;
 };
 
-export const Header: FC<HeaderPropsTypes> = ({ links }): ReactElement => {
-  const { appBar, imgLink, burgerBtn, navLinks } = useStyles();
-  const { root } = useBtnStyles();
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const closeHandler = () => setIsOpen(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
+export const Header: FC<HeaderPropsTypes> = ({
+  links,
+  isOpen,
+  closeHandler,
+  toggleMenu
+}): ReactElement => {
+  const { appBar, imgLink, burgerBtn, navLinks } = useHeaderStyles();
+  const { root } = useBtnToolBarStyles();
 
   return (
     <AppBar component='header' className={appBar}>

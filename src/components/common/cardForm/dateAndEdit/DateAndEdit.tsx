@@ -1,23 +1,20 @@
-import { FC, ReactElement } from 'react';
-
 import { Typography } from '@material-ui/core';
-
-import { EditDelBtns } from 'src/components/common';
+import { FC, ReactElement } from 'react';
 import { FlexBoxStyled } from 'src/components/styledComponents';
-
+import { EditDelBtns } from 'src/components/common';
 import { NoteType } from 'src/store/notes';
 
-type DateAndActBtnsPropsTypes = {
+type DateAndEditPropsTypes = {
   dateCreation: string;
   note: NoteType;
 };
 
-export const DateAndActBtns: FC<DateAndActBtnsPropsTypes> = ({
-  note,
-  dateCreation
+export const DateAndEdit: FC<DateAndEditPropsTypes> = ({
+  dateCreation,
+  note
 }): ReactElement => (
   <FlexBoxStyled width='100%'>
     <Typography>{dateCreation}</Typography>
-    <EditDelBtns note={note} />
+    <EditDelBtns isEditBtn={false} note={note} />
   </FlexBoxStyled>
 );

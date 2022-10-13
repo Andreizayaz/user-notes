@@ -10,7 +10,7 @@ import {
 
 import { NavLinksType } from './types';
 
-import { useStyles } from './styles';
+import { useNavBarStyles } from 'src/global/styles';
 
 type NavBarPropsTypes = {
   links: NavLinksType[];
@@ -21,7 +21,7 @@ export const NavBar: FC<NavBarPropsTypes> = ({
   links,
   addClasses = ''
 }): ReactElement => {
-  const { nav, linksList } = useStyles();
+  const { nav, linksList } = useNavBarStyles();
   return (
     <Box component='nav' className={`${nav} ${addClasses}`}>
       <FlexBoxStyled className={linksList}>

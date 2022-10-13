@@ -9,10 +9,10 @@ import { deleteAllUserNote } from 'src/store/notes';
 import { ConfirmAlert } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useBtnStyles } from '../styles';
+import { useBtnToolBarStyles } from 'src/global/styles';
 
 export const DeleteAllNotes: FC = (): ReactElement => {
-  const { root } = useBtnStyles();
+  const { root } = useBtnToolBarStyles();
   const { t } = useTranslation('translation', {
     keyPrefix: 'delete_all_notes'
   });

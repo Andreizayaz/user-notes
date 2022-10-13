@@ -1,19 +1,23 @@
 import { ChangeEvent, FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import parse from 'html-react-parser';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as yup from 'yup';
 
-import { TextField, Typography } from '@material-ui/core';
-
 import { NoteType } from 'src/store/notes';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
-import { TagsCloud, SaveCancelBtns } from 'src/components/common';
+import { SaveCancelBtns } from 'src/components/common';
+
+import { CustomTextField } from './customTextField';
+import { CreatedTags } from './createdTags';
+
+import { TEXT_FIELD_NAME, TITLE_FIELD_NAME } from 'src/constants';
 
 type FormPropsTypes = {
+  titleFieldError: string;
+  textFieldError: string;
   note: NoteType;
   saveText: string;
   cancelText: string;
@@ -26,12 +30,14 @@ type FormPropsTypes = {
   deleteTag: (tagName: string) => void;
 };
 
-const schema = yup.object().shape({
-  title: yup.string().required('Title is a required field'),
-  text: yup.string().required('Note Text is a required field')
-});
+type FormValues = {
+  title?: string;
+  text?: string;
+};
 
 export const Form: FC<FormPropsTypes> = ({
+  titleFieldError,
+  textFieldError,
   note,
   saveText,
   cancelText,
@@ -43,11 +49,16 @@ export const Form: FC<FormPropsTypes> = ({
   handleCancel,
   deleteTag
 }): ReactElement => {
+  const schema = yup.object().shape({
+    title: yup.string().required(titleFieldError),
+    text: yup.string().required(textFieldError)
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({
+  } = useForm<FormValues>({
     defaultValues: { title: note.title, text: note.text },
     mode: 'onBlur',
     resolver: yupResolver(schema)
@@ -61,43 +72,33 @@ export const Form: FC<FormPropsTypes> = ({
       rowGap='20px'
       width='100%'
     >
-      <TextField
-        {...register('title')}
-        id='title'
+      <CustomTextField
+        register={register}
+        id={TITLE_FIELD_NAME}
         label={titleLabel}
-        variant='outlined'
-        fullWidth
-        name='title'
+        name={TITLE_FIELD_NAME}
         value={note.title}
-        onChange={handleChange}
-        error={!!errors.title}
+        isError={!!errors.title}
         helperText={errors?.title?.message}
+        handleChange={handleChange}
       />
-      <TextField
-        {...register('text')}
-        id='text'
+      <CustomTextField
+        register={register}
+        id={TEXT_FIELD_NAME}
         label={textLabel}
-        variant='outlined'
-        fullWidth
-        multiline
-        minRows={10}
-        name='text'
-        value={parse(note.text)}
-        onChange={handleChange}
-        error={!!errors.text}
+        name={TEXT_FIELD_NAME}
+        isMultiline={true}
+        value={note.text}
+        isError={!!errors.text}
         helperText={errors?.text?.message}
+        handleChange={handleChange}
       />
       {!!note.tagsList.length && (
-        <FlexBoxStyled flexDirection='column' rowGap='20px'>
-          <Typography
-            component='h5'
-            variant='h5'
-            style={{ color: 'rgba(0,0,0, .7)' }}
-          >
-            {tagsCloudLabel}
-          </Typography>
-          <TagsCloud tags={note.tagsList} deleteTag={deleteTag} />
-        </FlexBoxStyled>
+        <CreatedTags
+          tagsCloudLabel={tagsCloudLabel}
+          tagsList={note.tagsList}
+          deleteTag={deleteTag}
+        />
       )}
       <SaveCancelBtns
         saveBtnText={saveText}

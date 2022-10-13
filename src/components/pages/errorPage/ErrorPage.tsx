@@ -11,12 +11,12 @@ import { FlexBoxStyled } from 'src/components/styledComponents';
 
 import { HOME_LINK } from 'src/constants';
 
-import { useStyles } from './styles';
+import { useErrorPageStyles } from 'src/global/styles';
 
 export const ErrorPage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', { keyPrefix: 'error_page' });
 
-  const { heading, icon, smileIcon, link } = useStyles();
+  const { heading, icon, smileIcon, link } = useErrorPageStyles();
 
   return (
     <MainContainer

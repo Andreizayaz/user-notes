@@ -1,9 +1,13 @@
-import { Button, Typography } from '@material-ui/core';
 import { FC, ReactElement } from 'react';
+
+import { Button, Typography } from '@material-ui/core';
+
 import { TagsCloud } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
+
 import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
-import { useBtnStyles } from '../styles';
+
+import { useBtnToolBarStyles } from 'src/global/styles';
 import { useFlexStyles } from './styles';
 
 type TagsFilterPropsTypes = {
@@ -33,7 +37,7 @@ export const TagsFilter: FC<TagsFilterPropsTypes> = ({
   handleToggle,
   handleResetFilter
 }): ReactElement => {
-  const { root } = useBtnStyles();
+  const { root } = useBtnToolBarStyles();
   const { flexStyle } = useFlexStyles();
 
   return (

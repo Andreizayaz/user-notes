@@ -6,14 +6,12 @@ import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { editUserNote, NoteType } from 'src/store/notes';
 
 import { TagsCloud } from 'src/components/common';
-
 import { FlexBoxStyled } from 'src/components/styledComponents';
+import { DateAndActBtns } from './DateAndActBtns';
 
 import { MAX_COUNT_TAGS_ON_CARD } from 'src/constants';
 
-import { DateAndActBtns } from './DateAndActBtns';
-
-import { useNoteCardStyles } from './styles';
+import { useNoteCardStyles } from 'src/global/styles';
 
 type NoteCardPropsTypes = {
   note: NoteType;
@@ -28,7 +26,7 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
   isText = false,
   isPartTagsDisplay = true
 }): ReactElement => {
-  const { root, noteCard } = useNoteCardStyles();
+  const { root, noteCard, cardContent } = useNoteCardStyles();
 
   const dispatch = useDispatch();
 
@@ -48,15 +46,7 @@ export const NoteCard: FC<NoteCardPropsTypes> = ({
           dateCreation={new Date(note.dateCreation).toLocaleDateString()}
         />
         <CardHeader title={note.title} component='h3' className={root} />
-        <CardContent
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            rowGap: '20px',
-            width: '100%',
-            justifyContent: 'center'
-          }}
-        >
+        <CardContent className={cardContent}>
           {isText && (
             <Typography
               component='p'

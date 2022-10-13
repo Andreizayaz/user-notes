@@ -1,2 +1,2 @@
 export { SaveCancelBtns } from './SaveCancelBtns';
-export { EditDelBtns } from './EditDelBtns';
+export { EditDelBtns } from './editDelBtns';

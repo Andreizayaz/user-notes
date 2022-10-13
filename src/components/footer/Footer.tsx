@@ -16,10 +16,10 @@ import {
   GITHUB_LINK
 } from 'src/constants';
 
-import { useStyles } from './styles';
+import { useFooterStyles } from 'src/global/styles';
 
 export const Footer: FC = (): ReactElement => {
-  const { footer, flex, link } = useStyles();
+  const { footer, flex, link } = useFooterStyles();
   return (
     <Box component='footer' className={footer}>
       <Container>

@@ -2,7 +2,7 @@ import { FC, ReactElement, ReactNode } from 'react';
 
 import { Drawer } from '@material-ui/core';
 
-import { useStyles } from './styles';
+import { useBurgerMenuStyles } from 'src/global/styles';
 
 type BurgerMenuPropsTypes = {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export const BurgerMenu: FC<BurgerMenuPropsTypes> = ({
   children,
   closeHandler
 }): ReactElement => {
-  const { root } = useStyles();
+  const { root } = useBurgerMenuStyles();
   return (
     <Drawer
       style={{ zIndex: 1 }}

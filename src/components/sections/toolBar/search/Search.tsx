@@ -7,28 +7,24 @@ import {
   FocusEvent,
   useRef
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { TextField, List, Box } from '@mui/material';
-import { ListItem, Typography } from '@material-ui/core';
-import { ClickAwayListener } from '@mui/base';
-
 import { NoteType, selectUserNotes } from 'src/store/notes';
 
-import {
-  BaseButtonStyled,
-  FlexBoxStyled
-} from 'src/components/styledComponents';
+import { FlexBoxStyled } from 'src/components/styledComponents';
+import { SearchField } from './searchField';
+import { SearchResult } from './searchResult';
 
-import { NOTE_LINK, SEARCH_RESULT_LIST_LINK } from 'src/constants';
+import { SEARCH_RESULT_LIST_LINK } from 'src/constants';
 
-import { useStyles } from './styles';
+import { useToolBarStyles } from 'src/global/styles';
 
 export const Search: FC = (): ReactElement => {
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const { text, list, link, searchBtn, inputField, flexStyle } = useStyles();
+  const { text, list, link, searchBtn, inputField, flexStyle } =
+    useToolBarStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
   const [isList, setIsList] = useState(false);
   const [searchResult, setSearchResult] = useState<NoteType[]>([]);
@@ -67,61 +63,30 @@ export const Search: FC = (): ReactElement => {
 
   return (
     <FlexBoxStyled flexDirection='column' width='33%' className={flexStyle}>
-      <ClickAwayListener onClickAway={hideSearchList}>
-        <FlexBoxStyled
-          alignItems='center'
-          justifyContent='flex-start'
-          component='form'
-          width='100%'
-          sx={{ columnGap: '3px' }}
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            id='outlined-basic'
-            label={t('search_note')}
-            variant='outlined'
-            sx={{ minWidth: '100px', width: '70%' }}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className={inputField}
-          />
-          <BaseButtonStyled
-            type='submit'
-            variant='contained'
-            sx={{ width: '25%' }}
-            disabled={!searchResult.length}
-            className={searchBtn}
-          >
-            {t('search')}
-          </BaseButtonStyled>
-        </FlexBoxStyled>
-      </ClickAwayListener>
+      <SearchField
+        btnText={t('search')}
+        fieldLabel={t('search_note')}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleFocus={handleFocus}
+        handleSubmit={handleSubmit}
+        hideSearchList={hideSearchList}
+        inputFieldClass={inputField}
+        isDisabledBtn={!searchResult.length}
+        searchBtnClass={searchBtn}
+      />
+
       {isList && (
-        <Box sx={{ position: 'relative', width: '100%' }}>
-          {!searchResult.length && (
-            <Typography className={text}>{t('no_found')}</Typography>
-          )}
-          {!!searchResult.length && (
-            <List className={list}>
-              {searchResult.map((note) => (
-                <ListItem key={note.id} style={{ padding: '20px' }} divider>
-                  <Link
-                    ref={linkRef}
-                    to={`${NOTE_LINK}/${note.id}`}
-                    state={note}
-                    className={link}
-                  >
-                    <Typography component='h5' variant='h5'>
-                      {note.title}
-                    </Typography>
-                    <Typography component='p'>{note.text}</Typography>
-                  </Link>
-                </ListItem>
-              ))}
-            </List>
-          )}
-        </Box>
+        <SearchResult
+          isNoFoundText={!searchResult.length}
+          isResult={!!searchResult.length}
+          linkClass={link}
+          linkRef={linkRef}
+          noFoundText={t('no_found')}
+          noFoundTextClass={text}
+          searchResult={searchResult}
+          searchResultClass={list}
+        />
       )}
     </FlexBoxStyled>
   );

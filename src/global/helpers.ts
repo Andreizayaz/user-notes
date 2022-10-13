@@ -1,9 +1,10 @@
+import { NoteType } from 'src/store/notes';
+
 import {
   SORT_BY_ASC_DATE,
   SORT_BY_DESC_DATE,
   SORT_BY_TITLE
 } from 'src/constants';
-import { NoteType } from 'src/store/notes';
 
 const sortByTitle = (titleOne: string, titleAnother: string): number => {
   if (titleOne > titleAnother) {

@@ -11,17 +11,17 @@ import {
 } from 'src/store/notes';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
-
 import { SortByCategory } from './sortByCategory';
 import { Search } from './search';
 import { DeleteAllNotes } from './deleteAllNotes';
-
-import { useFlexStyles } from './styles';
-import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
 import { TagsFilter } from './tagsFilter';
 
+import { MAX_COUNT_TAGS_IN_TOOLBAR } from 'src/constants';
+
+import { useFlexToolBarStyles } from 'src/global/styles';
+
 export const ToolBar: FC = (): ReactElement => {
-  const { flexStyles } = useFlexStyles();
+  const { flexStyles } = useFlexToolBarStyles();
 
   const { t } = useTranslation('translation', { keyPrefix: 'toolBar' });
 
