@@ -1,1 +1,1 @@
-export { SortByCategory } from './SortByCategory';
+export { default as SortByCategory } from './SortByCategoryContainer';

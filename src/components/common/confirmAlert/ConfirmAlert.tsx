@@ -1,11 +1,12 @@
 import { FC, ReactElement } from 'react';
 
-import { Button, ClickAwayListener, Typography } from '@material-ui/core';
-import { Alert } from '@mui/material';
+import { ClickAwayListener } from '@material-ui/core';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useAlertStyles } from './styles';
+import { useAlertStyles } from 'src/global/styles';
+
+import { CustomAlert } from './customAlert';
 
 type ConfirmAlertPropsTypes = {
   alertMessage: string;
@@ -31,19 +32,15 @@ export const ConfirmAlert: FC<ConfirmAlertPropsTypes> = ({
         width='80%'
         className={root}
       >
-        <Alert severity='error' className={alert}>
-          <Typography style={{ marginBottom: '20px' }}>
-            {alertMessage}
-          </Typography>
-          <FlexBoxStyled justifyContent='center' columnGap='30px'>
-            <Button variant='outlined' onClick={cancelHandler} className={btn}>
-              {cancelText}
-            </Button>
-            <Button variant='outlined' onClick={confirmHandler} className={btn}>
-              {confirmText}
-            </Button>
-          </FlexBoxStyled>
-        </Alert>
+        <CustomAlert
+          alertClass={alert}
+          alertMessage={alertMessage}
+          btnClass={btn}
+          cancelHandler={cancelHandler}
+          cancelText={cancelText}
+          confirmHandler={confirmHandler}
+          confirmText={confirmText}
+        />
       </FlexBoxStyled>
     </ClickAwayListener>
   );

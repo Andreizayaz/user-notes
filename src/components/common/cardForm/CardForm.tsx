@@ -3,21 +3,22 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { Typography, Card } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 import { addUserNote, editUserNote, NoteType } from 'src/store/notes';
 
 import { FlexBoxStyled } from 'src/components/styledComponents';
-import { EditDelBtns } from 'src/components/common/actionButtons';
-
-import { HOME_LINK } from 'src/constants';
 
 import { Form } from './form';
+import { DateAndEdit } from './dateAndEdit';
+
+import { HOME_LINK, TEXT_FIELD_NAME } from 'src/constants';
 
 import { getTagsList } from './helpers';
 
+import { useCardFormStyles } from 'src/global/styles';
+
 import './CardForm.scss';
-import { useCardFormStyles } from './style';
 
 type CardFormPropsTypes = {
   isEdit?: boolean;
@@ -28,6 +29,7 @@ export const CardForm: FC<CardFormPropsTypes> = ({
   isEdit = false,
   currentNote
 }): ReactElement => {
+  const { parse, stringify } = JSON;
   const { card } = useCardFormStyles();
   const { t } = useTranslation('translation', { keyPrefix: 'note_form' });
   const dispatch = useDispatch();
@@ -35,7 +37,7 @@ export const CardForm: FC<CardFormPropsTypes> = ({
 
   const formNote: NoteType =
     isEdit && currentNote
-      ? JSON.parse(JSON.stringify(currentNote))
+      ? parse(stringify(currentNote))
       : {
           id: 0,
           dateCreation: new Date(),
@@ -52,7 +54,7 @@ export const CardForm: FC<CardFormPropsTypes> = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === 'text') {
+    if (name === TEXT_FIELD_NAME) {
       note.tagsList = getTagsList(value);
     }
 
@@ -85,13 +87,10 @@ export const CardForm: FC<CardFormPropsTypes> = ({
   return (
     <Card className={card}>
       <FlexBoxStyled flexDirection='column' rowGap='20px'>
-        {isEdit && (
-          <FlexBoxStyled width='100%'>
-            <Typography>{dateCreation}</Typography>
-            <EditDelBtns isEditBtn={false} note={note} />
-          </FlexBoxStyled>
-        )}
+        {isEdit && <DateAndEdit dateCreation={dateCreation} note={note} />}
         <Form
+          titleFieldError={t('title_field_error')}
+          textFieldError={t('text_field_error')}
           cancelText={t('cancel')}
           deleteTag={deleteTag}
           handleCancel={handleCancel}

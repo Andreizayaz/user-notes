@@ -1,34 +1,27 @@
 import { FC, ReactElement, MouseEvent } from 'react';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { Button } from '@material-ui/core';
-import { Clear } from '@mui/icons-material';
-import EditIcon from '@mui/icons-material/Edit';
-
-import { FlexBoxStyled } from 'src/components/styledComponents';
-
-import { useBtnStyles } from 'src/global';
 import { deleteUserNote, NoteType } from 'src/store/notes';
+
 import {
   ALL_NOTES_LINK,
   EDIT_PAGE_LINK,
   HOME_LINK,
   NOTE_LINK
 } from 'src/constants';
-import { useLocation, useNavigate } from 'react-router-dom';
+
+import { EditDelBtns } from './EditDelBtns';
 
 type EditDelBtnsPropsTypes = {
   isEditBtn?: boolean;
   note: NoteType;
 };
 
-export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
+const EditDelBtnsContainer: FC<EditDelBtnsPropsTypes> = ({
   isEditBtn = true,
   note
 }): ReactElement => {
-  const { root, edit, del } = useBtnStyles();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,15 +47,13 @@ export const EditDelBtns: FC<EditDelBtnsPropsTypes> = ({
     navigateTo();
   };
   return (
-    <FlexBoxStyled width='fit-content' columnGap='20px'>
-      {isEditBtn && (
-        <Button className={root} onClick={editNote}>
-          <EditIcon className={edit} />
-        </Button>
-      )}
-      <Button className={root} onClick={deleteNote}>
-        <Clear className={del} />
-      </Button>
-    </FlexBoxStyled>
+    <EditDelBtns
+      isEditBtn={isEditBtn}
+      editNote={editNote}
+      deleteNote={deleteNote}
+    />
   );
 };
+
+export default EditDelBtnsContainer;
+EditDelBtnsContainer.displayName = 'EditDelBtnsContainer';

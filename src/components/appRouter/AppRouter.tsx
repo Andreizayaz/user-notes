@@ -18,7 +18,8 @@ import {
   NOTE_LINK,
   EDIT_PAGE_LINK,
   ERROR_PAGE_LINK,
-  SEARCH_RESULT_LIST_LINK
+  SEARCH_RESULT_LIST_LINK,
+  ID
 } from 'src/constants';
 
 export const AppRouter: FC = (): ReactElement => (
@@ -27,8 +28,11 @@ export const AppRouter: FC = (): ReactElement => (
     <Route path={CREATE_NOTE_LINK} element={<CreateNotePage />} />
     <Route path={ALL_NOTES_LINK} element={<AllNotesPage />} />
     <Route path={SEARCH_RESULT_LIST_LINK} element={<SearchNotesPage />} />
-    <Route path={`${NOTE_LINK}/:id`} element={<UserNotePage />} />
-    <Route path={`${NOTE_LINK}/:id${EDIT_PAGE_LINK}`} element={<EditPage />} />
+    <Route path={`${NOTE_LINK}/:${ID}`} element={<UserNotePage />} />
+    <Route
+      path={`${NOTE_LINK}/:${ID}${EDIT_PAGE_LINK}`}
+      element={<EditPage />}
+    />
     <Route path={ERROR_PAGE_LINK} element={<ErrorPage />} />
   </Routes>
 );

@@ -50,7 +50,9 @@
     "note_text": "Note Text",
     "tags_cloud": "Tags:",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "title_field_error": "Title is a required field",
+    "text_field_error": "Note Text is a required field"
   },
   "delete_all_notes": {
     "delete_all_notes": "Delete All Notes",

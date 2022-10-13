@@ -2,7 +2,7 @@ import { FC, ReactElement, ReactNode } from 'react';
 
 import { Container as CommonContainer } from '@material-ui/core';
 
-import { useStyles } from './styles';
+import { useContainerStyles } from 'src/global/styles';
 
 type ContainerPropsTypes = {
   children: NonNullable<ReactNode>;
@@ -11,7 +11,7 @@ type ContainerPropsTypes = {
 export const Container: FC<ContainerPropsTypes> = ({
   children
 }): ReactElement => {
-  const { root } = useStyles();
+  const { root } = useContainerStyles();
 
   return <CommonContainer className={root}>{children}</CommonContainer>;
 };

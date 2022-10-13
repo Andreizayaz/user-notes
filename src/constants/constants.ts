@@ -7,10 +7,16 @@ export const ALL_NOTES_LINK = '/notes';
 export const NOTE_LINK = '/note';
 export const EDIT_PAGE_LINK = '/edit';
 export const SEARCH_RESULT_LIST_LINK = '/founded-notes';
+export const ID = 'id';
 export const ERROR_PAGE_LINK = '*';
 
 // External Links
 export const GITHUB_LINK = 'https://github.com/Andreizayaz';
+
+/* Form Fields */
+// Fields names
+export const TITLE_FIELD_NAME = 'title';
+export const TEXT_FIELD_NAME = 'text';
 
 /* Max Count */
 // List Count

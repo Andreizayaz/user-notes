@@ -9,10 +9,10 @@ import { MainContainer, NoteCard } from 'src/components/common';
 
 import { ERROR_PAGE_LINK } from 'src/constants';
 
-import { useStyles } from './styles';
+import { useUserNotePageStyles } from 'src/global/styles';
 
 export const UserNotePage: FC = (): ReactElement => {
-  const { root } = useStyles();
+  const { root } = useUserNotePageStyles();
   const location = useLocation();
   const note = location.state as NoteType;
 

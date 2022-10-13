@@ -6,7 +6,7 @@ import { Box, Typography } from '@material-ui/core';
 import { Container, PageTitle } from 'src/components/common';
 import { ToolBar } from 'src/components/sections';
 
-import { useStyles } from './styles';
+import { useMainContainerStyles } from 'src/global/styles';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
 type MainContainerPropsTypes = {
@@ -32,7 +32,7 @@ export const MainContainer: FC<MainContainerPropsTypes> = ({
   yesNotes,
   noNotes
 }): ReactElement => {
-  const { flexStyle, heading, subHeadingSection } = useStyles();
+  const { flexStyle, heading, subHeadingSection } = useMainContainerStyles();
   return (
     <>
       <Helmet>

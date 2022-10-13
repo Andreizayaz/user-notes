@@ -9,7 +9,7 @@ import { selectUserNotes } from 'src/store/notes';
 import { MainContainer, CardForm } from 'src/components/common';
 import { FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useStyles } from './styles';
+import { useHeadingStyles } from 'src/global/styles';
 
 export const CreateNotePage: FC = (): ReactElement => {
   const { t } = useTranslation('translation', {
@@ -17,7 +17,7 @@ export const CreateNotePage: FC = (): ReactElement => {
   });
   const { userNotes } = useSelector(selectUserNotes);
 
-  const { heading } = useStyles();
+  const { heading } = useHeadingStyles();
 
   return (
     <MainContainer

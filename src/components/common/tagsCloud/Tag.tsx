@@ -1,11 +1,11 @@
 import { FC, ReactElement, MouseEvent } from 'react';
 
-import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@material-ui/core';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { BaseTextStyled, FlexBoxStyled } from 'src/components/styledComponents';
 
-import { useStyles } from './styles';
+import { useTagStyles } from 'src/global/styles';
 
 type TagPropsTypes = {
   tagText: string;
@@ -20,7 +20,7 @@ export const Tag: FC<TagPropsTypes> = ({
   filterByTag,
   deleteTag
 }): ReactElement => {
-  const { btn, closeIcon, tag } = useStyles();
+  const { btn, closeIcon, tag } = useTagStyles();
 
   const handleDeleteTag = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

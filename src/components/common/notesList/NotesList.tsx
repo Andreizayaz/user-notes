@@ -5,8 +5,10 @@ import { NoteType } from 'src/store/notes';
 
 import { NoteCard } from 'src/components/common/noteCard';
 import { FlexBoxStyled } from 'src/components/styledComponents';
+
 import { NOTE_LINK } from 'src/constants';
-import { useListStyles } from './styles';
+
+import { useListStyles } from 'src/global/styles';
 
 type NotesListPropsTypes = {
   userNotes: NoteType[];
